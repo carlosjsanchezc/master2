@@ -16,6 +16,7 @@ export class HomePage {
   myurl:string;
   api_token:string;
   constructor(public navCtrl: NavController, public HttpService:HttpService,public loadingCtrl: LoadingController) {
+    this.api_token='';
     this.loginapi();
     this.cargarBanner();
     this.presentLoading();
@@ -38,10 +39,11 @@ export class HomePage {
     this.HttpService.getCategorias(urlapi).subscribe((data) => 
     {
       console.log('Categorias');
+      this.categorias=[];
       console.log(data['success']['products']);
-      this.categorias=data;
-      HttpService.categorias=this.categorias;
-      MyApp.pages=this.categorias;
+      this.categorias=data['success']['products'];
+     // HttpService.categorias=this.categorias;
+      
       
 
     },
@@ -70,9 +72,9 @@ export class HomePage {
 
   loginapi()
   {
-    this.api_token=HttpService.api_token;
   
-    if (HttpService.api_token)
+  
+    if (this.api_token)
     {
       this.cargarProductos();
       this.getcategorias();
@@ -83,7 +85,7 @@ export class HomePage {
       this.HttpService.loginapi().subscribe((data) => 
       {
         this.api_token=data['api_token'];
-        HttpService.api_token=data['api_token'];
+        
          this.cargarProductos();
          this.getcategorias();
 

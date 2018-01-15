@@ -28,8 +28,8 @@ export class MyApp {
 
   initializeApp() {
     this.pages = [
-      { name: 'Home', component: HomePage },
-      { name: 'List', component: ListPage }
+        { title: 'My Page 1', component: HomePage}
+        ,{ title: 'My Page 1', component: HomePage}      
     ];
     console.log('Paginas');
 console.log(this.pages);
