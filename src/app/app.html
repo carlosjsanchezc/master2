@@ -1,14 +1,16 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="light">
+        <div text-center>
+        <img src="../assets/imgs/elelogobig.png" height="120px">
+        </div>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <button menuClose ion-item *ngFor="let p of pages" >
+      {{p.name}} 
       </button>
     </ion-list>
   </ion-content>

@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { HttpService} from '../providers/http-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,24 +14,27 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
+  api_token:string;
   pages: Array<{title: string, component: any}>;
+  url="https://www.dc2.com.ve/opencart/upload";
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
+
 
   }
 
   initializeApp() {
+    this.pages = [
+      { name: 'Home', component: HomePage },
+      { name: 'List', component: ListPage }
+    ];
+    console.log('Paginas');
+console.log(this.pages);
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+  
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

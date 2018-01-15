@@ -1,18 +1,75 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar color="light">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        <div text-center>
+        <img src="../assets/imgs/elelogo.png" height="40px">
+        </div>
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-left (click)="openCart()">
+          <ion-icon name="cart"></ion-icon>
+         
+  
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+    <ion-searchbar showCancelButton (ionInput)="filterProducts($event)" color="danger"  placeholder="Búsqueda" (ionClear)="clearBusq($event)"></ion-searchbar>
+  </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+ 
+<div >
+    <ion-slides >
+        <ion-slide *ngFor="let p of banners">
+          <h1>{{p.title}}</h1>
+          <img [src]="myurl+p.image" alt="">
+        </ion-slide>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    </ion-slides>
+  
+</div>
+  
+  <ion-grid>
+     
+  <ion-row *ngFor="let posicion of productsgrid; let i=index" style="border-top: 1px solid #999; " color="dark">
+      
+    <ion-col col-6 *ngIf="posicion[0]>=0" style="padding:1px;border-right:1px solid #999;font-size:1.5rem" >
+      <div style="position: absolute; bottom: 1px;right:1px">
+      
+        <button  ion-button color="light" right ><ion-icon  name="cart"></ion-icon></button>
+      </div>
+      <div text-center>
+          <img *ngIf="products[posicion[0]].image" [src]="myurl+products[posicion[0]].image" alt="" height="150px">
+        </div> 
+          <p text-center style="font-size:2rem">{{products[posicion[0]].name}}</p><br>
+            Precio:{{products[posicion[0]].price.toLocaleString('de-ge', {maximumFractionDigits: 2})}}<br>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+
+     
+    </ion-col>
+ 
+    <ion-col col-6  *ngIf="posicion[1]>=0" style="padding:1px;font-size:1.5rem"> 
+      <div style="position: absolute;  bottom: 1px;right:1px">
+      
+        <button ion-button color="light" right><ion-icon  name="cart"></ion-icon></button>
+      </div>
+      <div text-center> 
+        <img *ngIf="products[posicion[1]].image" [src]="myurl+products[posicion[1]].image" alt="" height="150px">
+      </div>   
+          <p text-center style="font-size:2rem">{{products[posicion[1]].name}}</p><br>
+          Precio:{{products[posicion[1]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
+
+
+           
+    
+      
+      
+    </ion-col>
+
+  </ion-row>
+
+</ion-grid>
 </ion-content>
