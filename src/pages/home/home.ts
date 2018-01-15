@@ -161,17 +161,19 @@ export class HomePage {
   }
  
   filterProducts(ev: any) {
-    this.cargarProductos();
+    //this.cargarProductos();
+    this.products=this.aproducts;
     let val = ev.target.value;
      if (val && val.trim() !== '') {
       this.products= this.products.filter(function(item) {
-
+        console.log(item.name);
+        console.log(item.name.toLowerCase().includes(val.toLowerCase()));
         return item.name.toLowerCase().includes(val.toLowerCase());
        
       });
       delete this.productsgrid;
       this.productsgrid=[];
-
+      console.log(this.products);
       let nrows=0;
       nrows=Math.ceil(this.products.length/2);
     this.losrows=nrows;
@@ -201,7 +203,13 @@ if (i<this.products.length)
       ni++;
     }
   }
-
+{
+  console.log('Filtrado:');
+  console.log(this.products);
+ 
+  console.log(this.productsgrid);
+  this.products=this.aproducts;
+}
     }
 
 

@@ -7,7 +7,7 @@ export class HttpService
 {
   api_token:string;
   url="https://www.dc2.com.ve/opencart/upload";
-
+ // url="https://localhost/upload";
   categorias:any[]=[];
   
 
