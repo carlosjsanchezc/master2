@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar color="light">
+      <ion-buttons start>
+        <button ion-button icon-only (click)="cancel()">
+         
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>
+          <div text-center>
+            <img src="../assets/imgs/elelogo.png" height="40px">
+          </div>
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+
+
+  
+<ion-content>
+  <ion-list>
+    <ion-list-header color="dark">
+    <h2>Carrito de Compras</h2>
+    <ion-icon name="cart" item-end ></ion-icon>
+    </ion-list-header>
+    <ion-item *ngFor="let item of micart">
+        <ion-thumbnail item-start>
+          <img [src]="miurl+item.image">
+        </ion-thumbnail>
+      {{item.name}}
+    </ion-item>
+    <ion-item *ngIf="not micart">
+        No hay datos en el carro
+    </ion-item>
+  </ion-list>
+  
+</ion-content>
