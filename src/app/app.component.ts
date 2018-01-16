@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { HttpService} from '../providers/http-service';
+//import { CartPopPage } from '../pages/cart-pop/cart-pop';
 
 @Component({
   templateUrl: 'app.html'

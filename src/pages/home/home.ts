@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, Slides,LoadingController } from 'ionic-angular';
+import { NavController,LoadingController,ModalController, AlertController } from 'ionic-angular';
 import { HttpService} from '../../providers/http-service'
-import { MyApp } from '../../app/app.component';
+
+import { CartPopPage} from '../cart-pop/cart-pop';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,24 +12,96 @@ export class HomePage {
   products:any[] = [];
   aproducts:any[] = [];
   categorias:any[]=[];
+  rate:number;
+  countcart=0;
   losrows=0;
+  accion='';
   productsgrid:any[]=[];
   myurl:string;
   api_token:string;
-  constructor(public navCtrl: NavController, public HttpService:HttpService,public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public HttpService:HttpService,public loadingCtrl: LoadingController,public modalCtrl: ModalController, public alertCtrl:AlertController) {
     this.api_token='';
+    this.rate=0;
     this.loginapi();
     this.cargarBanner();
-    this.presentLoading();
+
+    //this.presentLoading();
 
   }
 
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Por favor espere...",
-      duration: 10000
+      duration: 2000
     });
     loader.present();
+  }
+
+  getrate()
+  {
+    let urlapi=this.HttpService.url+"/index.php?route=api/custom/ratecurrency&api_token="+this.api_token;
+ 
+    
+    this.HttpService.httpr(urlapi).subscribe((data) => 
+    {
+      console.log(this.api_token);
+      console.log('url:'+urlapi);
+      console.log(data);
+      //this.rate=data['value'];
+    },
+    (error) =>{ 
+    console.error(error);
+    });
+
+  }
+
+
+
+  agregacarro(product_id,quantity)
+  {
+    this.accion='Agregando a carro..';
+    let urlapi=this.HttpService.url+"/index.php?route=api/custom/addcart&quantity="+quantity+"&product_id="+product_id+"&api_token="+this.api_token;
+    let loader = this.loadingCtrl.create({
+      content: "Agregando item al carro...",
+      duration: 2000
+    });
+    loader.present();
+    
+    this.HttpService.httpr(urlapi).subscribe((data) => 
+    {
+      console.log(this.api_token);
+
+      this.accion='Item agregado con exito';
+      this.countcart+=1;
+
+    },
+    (error) =>{ 
+      this.accion='Error al agregar item:'+this.api_token+urlapi;
+    console.error(error);
+    });
+
+  }
+
+  vercarro()
+  {
+
+      console.log('Modal');
+      console.log(this.api_token);
+      console.log(this.myurl);
+
+
+   
+      let myModal = this.modalCtrl.create(CartPopPage,{api_token:this.api_token, url:this.myurl});
+      console.log('click modal');
+      myModal.present();
+      console.log('Modal presentado');
+      
+  
+      myModal.onDidDismiss(data => {
+        console.log('Saliendo');
+        
+        });
+ 
   }
   getcategorias()
   {
@@ -87,7 +160,8 @@ export class HomePage {
         this.api_token=data['api_token'];
         
          this.cargarProductos();
-         this.getcategorias();
+         this.getrate();
+
 
       },
       (error) =>{ 

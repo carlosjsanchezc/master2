@@ -21,6 +21,11 @@ export class HttpService
 
 
   }
+  httpr(url) {
+
+    return this.http.get(url);
+  }
+
  getBanner() {
 
     return this.http.get(this.url+"/products.php?option=1");
