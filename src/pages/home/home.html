@@ -45,13 +45,12 @@
             Precio:{{products[posicion[0]].price.toLocaleString('de-ge', {maximumFractionDigits: 2})}}<br>
 
 
-            <div >
       
                 <button  ion-button color="light" block (click)="agregacarro(products[posicion[0]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
-              </div>
+        
     </ion-col>
  
-    <ion-col col-6  *ngIf="posicion[1]>=0" style="padding:1px;font-size:1.5rem"> 
+    <ion-col col-6  *ngIf="posicion[1]>=0"  style="padding:1px;font-size:1.5rem"> 
       
       <div text-center> 
         <img *ngIf="products[posicion[1]].image" [src]="myurl+products[posicion[1]].image" alt=""  width="70%" height="auto">
@@ -59,9 +58,9 @@
           <p text-center style="font-size:2rem">{{products[posicion[1]].name}}</p><br>
           Precio:{{products[posicion[1]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
 
-          <div>
+      
                   <button ion-button color="light" block (click)="agregacarro(products[posicion[1]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
-         </div>
+         
            
     
       
@@ -73,7 +72,7 @@
 </ion-grid>
 </ion-content>
 <ion-footer>
-    <ion-toolbar>
+    <ion-toolbar style="font-size:0.7rem">
   {{accion}}
   </ion-toolbar>
 </ion-footer>

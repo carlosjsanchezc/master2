@@ -43,8 +43,10 @@ export class CartPopPage {
     {
       console.log('Datos del Carro');
      
-      console.log(data);
-      this.micart=data;
+        this.micart=data['results'];
+        console.log(this.micart);
+      
+        //this.micart=data;
       
       });
 

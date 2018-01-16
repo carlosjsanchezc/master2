@@ -76,7 +76,7 @@ export class HomePage {
 
     },
     (error) =>{ 
-      this.accion='Error al agregar item:'+this.api_token+urlapi;
+      this.accion=urlapi+'- item:'+JSON.stringify(error);
     console.error(error);
     });
 

@@ -28,7 +28,19 @@
         <ion-thumbnail item-start>
           <img [src]="miurl+item.image">
         </ion-thumbnail>
-      {{item.name}}
+        {{item.name}}
+        <ion-buttons end>
+          <button ion-button  small (click)="cancel()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          <input type="text" >
+          <button ion-button small  (click)="cancel()">
+            <ion-icon name="less"></ion-icon>
+          </button>
+          <button ion-button  small (click)="cancel()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-buttons>
     </ion-item>
     <ion-item *ngIf="not micart">
         No hay datos en el carro
