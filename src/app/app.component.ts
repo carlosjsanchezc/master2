@@ -55,8 +55,7 @@ export class MyApp {
       this.pages=[];
       console.log(data['success']);
       this.pages=data['success']['products'];
-      this.pages.unshift({'name':'Login'});
-      this.pages.unshift({'name':'Home'});
+
       
      // this.pages=data['success']['products'];
      // HttpService.categorias=this.categorias;

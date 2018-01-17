@@ -19,35 +19,63 @@
 
   
 <ion-content>
-  <ion-list>
+
     <ion-list-header color="dark">
     <h2>Carrito de Compras</h2>
     <ion-icon name="cart" item-end ></ion-icon>
     </ion-list-header>
-    <ion-item *ngFor="let item of micart">
-        <ion-thumbnail item-start>
+    <ion-grid>
+      <ion-row *ngFor="let item of micart; let i=index" color="dark">
+        <ion-col col-2>
           <img [src]="miurl+item.image">
-        </ion-thumbnail>
-        <div style="font-size:1rem">
-        {{item.name}}
-        <p>{{item.price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}</p>
-        <ion-buttons end>
-            <button ion-button  small (click)="cancel()">
-              <ion-icon name="add"></ion-icon>
-            </button>
-               <input type="number" class="shrinki" value="{{item.quantity}}">
-            <button ion-button small  (click)="cancel()">
-              <ion-icon name="remove"></ion-icon>
-            </button>
-            <button ion-button  small (click)="cancel()">
-              <ion-icon name="close"></ion-icon>
-            </button>
-               </ion-buttons>
-      </div>
-    </ion-item>
-    <ion-item *ngIf="not micart">
-        No hay datos en el carro
-    </ion-item>
-  </ion-list>
+        </ion-col>
+        <ion-col col-4 style="font-size: 1.2rem">
+            {{item.name}}
+            <p style="font-size: 0.8rem">{{currency}} {{(item.price*rate).toLocaleString('de-ge', {minimumFractionDigits: 2})}}</p>
+        </ion-col>
+        <ion-col col-1>
+            <input type="number" class="shrinki" [(ngModel)]="micart[i].quantity"  value="{{item.quantity}}" name="item-{{i}}">
+        </ion-col>
+        <ion-col col-5 >
+              <ion-buttons end>
+              <button ion-button small   color="light" (click)="modificapos(i)">
+                <ion-icon name="checkmark" ></ion-icon>
+              </button>
+              <button ion-button  small   color="light" (click)="borrapos(i)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+              </ion-buttons>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-list>
+          <ion-item>
+            Sub-total:
+            <ion-note item-end>   
+                <ion-badge color="dark">
+                  {{(subtotal*rate).toLocaleString('de-ge', {minimumFractionDigits: 2})}} 
+                </ion-badge>
+            </ion-note>
+          </ion-item>
+          <ion-item>
+              Impuestos:           
+              <ion-note item-end>   
+                  <ion-badge color="dark">
+                    {{(taxes*rate).toLocaleString('de-ge', {minimumFractionDigits: 2})}} 
+                  </ion-badge>
+              </ion-note>
+          </ion-item>
+          <ion-item>
+                Total:
+                <ion-note item-end>   
+                    <ion-badge color="dark">
+                      {{(total*rate).toLocaleString('de-ge', {minimumFractionDigits: 2})}} 
+                    </ion-badge>
+                </ion-note>
+          </ion-item>
+        </ion-list>
+    </ion-grid>
+
   
 </ion-content>

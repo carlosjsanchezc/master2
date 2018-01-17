@@ -12,7 +12,7 @@ export class HomePage {
   products:any[] = [];
   aproducts:any[] = [];
   categorias:any[]=[];
-  
+  currency:string;
   rate:number;
   countcart=0;
   losrows=0;
@@ -50,6 +50,7 @@ export class HomePage {
       console.log('url:'+urlapi);
       console.log(data);
       this.rate=data['value'];
+      this.currency=data['symbol_left'];
       //this.rate=data['value'];
     },
     (error) =>{ 
@@ -119,9 +120,10 @@ export class HomePage {
       console.log(this.api_token);
       console.log(this.myurl);
 
-
-   
-      let myModal = this.modalCtrl.create(CartPopPage,{api_token:this.api_token, url:this.myurl});
+console.log('Rate:'+this.rate.toString());
+console.log('Symbol'+this.currency);
+    
+      let myModal = this.modalCtrl.create(CartPopPage,{api_token:this.api_token, url:this.myurl, rate:this.rate,  currency:this.currency});
       console.log('click modal');
       myModal.present();
       console.log('Modal presentado');
@@ -129,6 +131,7 @@ export class HomePage {
   
       myModal.onDidDismiss(data => {
         console.log('Saliendo');
+        this.countercarro();
         
         });
  
@@ -145,6 +148,16 @@ export class HomePage {
       this.categorias=[];
       console.log(data['success']);
       this.categorias=data['success'];
+      for (let i=0; i<this.categorias.length;i+=1)
+   {
+    this.categorias[i].name=this.categorias[i].name.replace("&quot;",'"');
+    this.categorias[i].name=this.categorias[i].name.replace("&amp;",'&');
+    this.categorias[i].name=this.categorias[i].name.replace("&lt;",'<');
+    this.categorias[i].name=this.categorias[i].name.replace("&gt;",'>');
+
+
+
+   }
      // HttpService.categorias=this.categorias;
       
       
@@ -176,7 +189,7 @@ export class HomePage {
   loginapi()
   {
   
-  
+   
     if (this.api_token)
     {
       this.cargarProductos();
@@ -188,9 +201,9 @@ export class HomePage {
       this.HttpService.loginapi().subscribe((data) => 
       {
         this.api_token=data['api_token'];
-        
+        this.getrate();
          this.cargarProductos();
-         this.getrate();
+       
 
 
       },
