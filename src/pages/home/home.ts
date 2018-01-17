@@ -12,6 +12,7 @@ export class HomePage {
   products:any[] = [];
   aproducts:any[] = [];
   categorias:any[]=[];
+  
   rate:number;
   countcart=0;
   losrows=0;
@@ -35,6 +36,7 @@ export class HomePage {
       duration: 2000
     });
     loader.present();
+    
   }
 
   getrate()
@@ -47,37 +49,65 @@ export class HomePage {
       console.log(this.api_token);
       console.log('url:'+urlapi);
       console.log(data);
+      this.rate=data['value'];
       //this.rate=data['value'];
     },
     (error) =>{ 
+      this.accion='Error al cargar moneda Bs'+JSON.stringify(error);
     console.error(error);
     });
 
   }
 
+  countercarro()
+  {
 
+    let urlapi=this.HttpService.url+"/index.php?route=api/custom/vproductscart&api_token="+this.api_token;
+    console.log(urlapi);
+    console.log('COntando Items');
+    this.HttpService.httpr(urlapi).subscribe((data) => 
+    {
+      console.log(this.api_token);
+      this.countcart=0;
+      console.log(data);
+      if (data['results'])
+      {
+      this.countcart=data['results'].length;
+      }
+
+    },
+    (error) =>{ 
+      console.log('error');
+    });
+
+  }
 
   agregacarro(product_id,quantity)
   {
     this.accion='Agregando a carro..';
-    let urlapi=this.HttpService.url+"/index.php?route=api/custom/addcart&quantity="+quantity+"&product_id="+product_id+"&api_token="+this.api_token;
-    let loader = this.loadingCtrl.create({
-      content: "Agregando item al carro...",
-      duration: 2000
-    });
-    loader.present();
+
+    //let urlapi=this.HttpService.url+"/index.php?route=api/custom/products&api_token="+this.api_token;
+    let micadena="&quantity="+quantity+"&product_id="+product_id;
+    let urlapi=this.HttpService.url+"/index.php?route=api/custom/addproductscart&api_token="+this.api_token+micadena;
+    console.log(urlapi);
     
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
       console.log(this.api_token);
 
       this.accion='Item agregado con exito';
-      this.countcart+=1;
+      this.countercarro();
+      
 
     },
     (error) =>{ 
       this.accion=urlapi+'- item:'+JSON.stringify(error);
     console.error(error);
+    let loader = this.loadingCtrl.create({
+      content:JSON.stringify(error),
+      duration: 2000
+    });
+    loader.present();
     });
 
   }
@@ -113,8 +143,8 @@ export class HomePage {
     {
       console.log('Categorias');
       this.categorias=[];
-      console.log(data['success']['products']);
-      this.categorias=data['success']['products'];
+      console.log(data['success']);
+      this.categorias=data['success'];
      // HttpService.categorias=this.categorias;
       
       
@@ -187,6 +217,7 @@ export class HomePage {
     this.products[i].name=this.products[i].name.replace("&amp;",'&');
     this.products[i].name=this.products[i].name.replace("&lt;",'<');
     this.products[i].name=this.products[i].name.replace("&gt;",'>');
+    this.products[i].price=Number(this.products[i].price)*this.rate;
     
     this.products[i].description=this.products[i].description.replace("&quot;",'"');
     this.products[i].description=this.products[i].description.replace("&amp;",'&');
@@ -247,6 +278,7 @@ export class HomePage {
       });
       delete this.productsgrid;
       this.productsgrid=[];
+      console.log('Productos Filtrados:')
       console.log(this.products);
       let nrows=0;
       nrows=Math.ceil(this.products.length/2);
@@ -282,7 +314,7 @@ if (i<this.products.length)
   console.log(this.products);
  
   console.log(this.productsgrid);
-  this.products=this.aproducts;
+
 }
     }
 

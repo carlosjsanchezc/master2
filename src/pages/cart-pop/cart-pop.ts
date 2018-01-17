@@ -38,7 +38,7 @@ export class CartPopPage {
 
   vercarro()
   {
-    let urlapi=this.HttpService.url+"/index.php?route=api/custom/vercarro&api_token="+this.api_token;
+    let urlapi=this.HttpService.url+"/index.php?route=api/custom/vproductscart&api_token="+this.api_token;
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
       console.log('Datos del Carro');
@@ -48,6 +48,16 @@ export class CartPopPage {
       
         //this.micart=data;
       
+      },
+      (error) =>{ 
+        //this.accion=urlapi+'- item:'+JSON.stringify(error);
+      console.error(error);
+      let alert = this.AlertController.create({
+        title: 'Error',
+        subTitle: 'Error:'+JSON.stringify(error),
+        buttons: ['Dismiss']
+      });
+      alert.present();
       });
 
   }

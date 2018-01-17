@@ -35,34 +35,23 @@
   <ion-grid>
      
   <ion-row *ngFor="let posicion of productsgrid; let i=index" style="border-top: 1px solid #999; " color="dark">
-      
-    <ion-col col-6 *ngIf="posicion[0]>=0" style="padding:1px;border-right:1px solid #999;font-size:1.5rem" >
-     
-      <div text-center>
-          <img *ngIf="products[posicion[0]].image" [src]="myurl+products[posicion[0]].image" alt="" width="70%" height="auto">
-        </div> 
-          <p text-center style="font-size:2rem">{{products[posicion[0]].name}}</p><br>
-            Precio:{{products[posicion[0]].price.toLocaleString('de-ge', {maximumFractionDigits: 2})}}<br>
-
-
-      
-                <button  ion-button color="light" block (click)="agregacarro(products[posicion[0]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
-        
-    </ion-col>
+      <ion-col col-6 *ngIf="posicion[0]>=0" style="padding:1px;border-right:1px solid #999;font-size:1.5rem" >
+           <div text-center>
+            <img *ngIf="products[posicion[0]].image" [src]="myurl+products[posicion[0]].image" alt="" width="auto" height="80px">
+          </div> 
+          <p style="font-size:1.5rem" text-center >{{products[posicion[0]].name}}</p><br>
+            Precio:{{products[posicion[0]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
+            <button ion-button bottom color="light" block (click)="agregacarro(products[posicion[0]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
+      </ion-col>
  
     <ion-col col-6  *ngIf="posicion[1]>=0"  style="padding:1px;font-size:1.5rem"> 
-      
-      <div text-center> 
-        <img *ngIf="products[posicion[1]].image" [src]="myurl+products[posicion[1]].image" alt=""  width="70%" height="auto">
-      </div>   
-          <p text-center style="font-size:2rem">{{products[posicion[1]].name}}</p><br>
+          <div text-center> 
+            <img *ngIf="products[posicion[1]].image" [src]="myurl+products[posicion[1]].image" alt=""  width="auto" height="80px">
+          </div>   
+          <p text-center style="font-size:1.5rem">{{products[posicion[1]].name}}</p><br>
           Precio:{{products[posicion[1]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
-
-      
-                  <button ion-button color="light" block (click)="agregacarro(products[posicion[1]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
+          <button ion-button color="light" bottom block (click)="agregacarro(products[posicion[1]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
          
-           
-    
       
       
     </ion-col>

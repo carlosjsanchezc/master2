@@ -28,19 +28,22 @@
         <ion-thumbnail item-start>
           <img [src]="miurl+item.image">
         </ion-thumbnail>
+        <div style="font-size:1rem">
         {{item.name}}
+        <p>{{item.price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}</p>
         <ion-buttons end>
-          <button ion-button  small (click)="cancel()">
-            <ion-icon name="add"></ion-icon>
-          </button>
-          <input type="text" >
-          <button ion-button small  (click)="cancel()">
-            <ion-icon name="less"></ion-icon>
-          </button>
-          <button ion-button  small (click)="cancel()">
-            <ion-icon name="close"></ion-icon>
-          </button>
-        </ion-buttons>
+            <button ion-button  small (click)="cancel()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+               <input type="number" class="shrinki" value="{{item.quantity}}">
+            <button ion-button small  (click)="cancel()">
+              <ion-icon name="remove"></ion-icon>
+            </button>
+            <button ion-button  small (click)="cancel()">
+              <ion-icon name="close"></ion-icon>
+            </button>
+               </ion-buttons>
+      </div>
     </ion-item>
     <ion-item *ngIf="not micart">
         No hay datos en el carro
