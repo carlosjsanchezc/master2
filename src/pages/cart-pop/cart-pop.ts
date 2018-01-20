@@ -81,9 +81,14 @@ console.log('Symbol'+this.currency);
     console.log("Url:"+urlapi);
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
-      console.log('Datos del Carro');
+      console.log('Datos del Carroxxx');
       this.subtotal=data['subtotal'];
       this.taxes=data['taxes'];
+      this.taxes=0;
+      if (!this.taxes)
+      {
+        this.taxes=0;
+      }
       this.total=data['total'];
       console.log(data);      
      

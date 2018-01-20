@@ -1,25 +1,32 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform,ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+//import { ListPage } from '../pages/list/list';
 import { HttpService} from '../providers/http-service';
-//import { CartPopPage } from '../pages/cart-pop/cart-pop';
+import { LoginModalPage } from '../pages/login-modal/login-modal';
+import { ProductModalPage } from '../pages/product-modal/product-modal';
+import { CartPopPage } from '../pages/cart-pop/cart-pop';
+
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  showSubmenu: boolean = false;
   rootPage: any = HomePage;
   api_token:string;
   pages: any[]=[];
-  url="https://www.dc2.com.ve/opencart/upload";
+  showLevel1 = null;
+showLevel2 = null;
+  v:any[]=[ ' '];
+  url="https://elelook.com.ve";
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,15 +34,65 @@ export class MyApp {
 
   }
 
-  initializeApp() {
-    this.pages = [
-        { title: 'My Page 1', component: HomePage}
-        ,{ title: 'My Page 1', component: HomePage}      
-    ];
+  loginform()
+  {
+    let myModal = this.modalCtrl.create(LoginModalPage);
+      console.log('click modal');
+      myModal.present();
+      console.log('Modal presentado');
+      
+  
+      myModal.onDidDismiss(data => {
+        console.log('Saliendo');
+        
+        
+        });
+  }
 
-    this.getcategorias()
-    console.log('Paginas');
-    console.log(this.pages);
+  isLevel1Shown(idx) {
+    return this.showLevel1 === idx;
+  };
+
+  isLevel2Shown(idx) {
+    return this.showLevel2 === idx;
+  };
+  toggleLevel2(idx) {
+    if (this.isLevel2Shown(idx)) {
+      this.showLevel1 = null;
+      this.showLevel2 = null;
+    } else {
+      this.showLevel1 = idx;
+      this.showLevel2 = idx;
+    }
+  };
+  toggleLevel1(idx) {
+    if (this.isLevel1Shown(idx)) {
+      this.showLevel1 = null;
+    } else {
+      this.showLevel1 = idx;
+    }
+  };
+
+menuItemHandler() {
+  this.showSubmenu = !this.showSubmenu;
+}
+  initializeApp() {
+    this.pages = [     
+    ];
+    this.v=[];
+    this.HttpService.loginapi().subscribe((data)=>
+    {
+      this.api_token=data['api_token'];
+      this.getcategorias()
+      console.log('Paginas');
+      console.log(this.pages);
+      console.log(data);
+
+    },(error) =>{ 
+      console.error(error);
+      });
+
+
 
 
     this.platform.ready().then(() => {
@@ -45,9 +102,9 @@ export class MyApp {
     });
   }
   getcategorias()
-  {
-
-    let urlapi=this.HttpService.url+"/index.php?route=api/custom/categs&api_token="+this.api_token;
+    {
+      
+    let urlapi=this.url+"/index.php?route=api/custom/categs&api_token="+this.api_token;
   
     this.HttpService.getCategorias(urlapi).subscribe((data) => 
     {
@@ -55,7 +112,9 @@ export class MyApp {
       this.pages=[];
       console.log(data['success']);
       this.pages=data['success']['products'];
-
+      console.log('Categorias');
+      console.log(this.pages);
+      
       
      // this.pages=data['success']['products'];
      // HttpService.categorias=this.categorias;

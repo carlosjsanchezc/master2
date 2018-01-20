@@ -8,14 +8,22 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item><ion-icon name="home"></ion-icon> Home</button>
-      <button menuClose ion-item><ion-icon name="person"></ion-icon> Login</button>
-      
-      <button menuClose ion-item *ngFor="let p of pages" style="font-size: 1rem" >
-      {{p.name}} 
-      </button>
+      <ion-list id="sidenav" inset >
+      <button menuClose ion-item><ion-icon name="home"></ion-icon>Home</button>
+      <button menuClose ion-item (click)="loginform()"><ion-icon name="person" ></ion-icon>Login</button>
+      <ion-list-header>
+        <ion-icon name="basket"></ion-icon>Categorías
+      </ion-list-header>        
+      <ion-item *ngFor="let p of pages; let i=index" text-wrap  style="font-size: 1.2rem" >
+      {{p.name}} <ion-icon (click)="toggleLevel1('idx'+i)" [ngClass]="{active: isLevel1Shown('idx'+i)}" *ngIf="p.parents.length>0" color="success" item-right [name]="isLevel1Shown('idx'+i) ? 'arrow-dropdown' : 'arrow-dropright-circle'"></ion-icon>
+      <ion-list *ngIf="isLevel1Shown('idx'+i)" >
+          <ion-item *ngFor="let m of p.parents"  style="font-size: 1rem" text-wrap>
+            {{m.name}}
+          </ion-item>
+        </ion-list>
+      </ion-item>
     </ion-list>
+    
   </ion-content>
 
 </ion-menu>

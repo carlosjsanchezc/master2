@@ -10,4 +10,4 @@ import {CartPopPage } from './cart-pop';
     IonicPageModule.forChild(CartPopPage),
   ],
 })
-export class EventModalPageModule {}
+export class CartPopModule {}

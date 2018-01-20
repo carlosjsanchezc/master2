@@ -3,6 +3,8 @@ import { NavController,LoadingController,ModalController, AlertController } from
 import { HttpService} from '../../providers/http-service'
 
 import { CartPopPage} from '../cart-pop/cart-pop';
+import { ProductModalPage } from '../product-modal/product-modal';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -18,8 +20,9 @@ export class HomePage {
   losrows=0;
   accion='';
   productsgrid:any[]=[];
-  myurl:string;
-  api_token:string;
+  myurl="https://elelook.com.ve";
+
+  public api_token:string;
   constructor(public navCtrl: NavController, public HttpService:HttpService,public loadingCtrl: LoadingController,public modalCtrl: ModalController, public alertCtrl:AlertController) {
     this.api_token='';
     this.rate=0;
@@ -29,7 +32,23 @@ export class HomePage {
     //this.presentLoading();
 
   }
+verproducto(product_id,price,image,name)
+{
+  console.log('name:'+name);
+  let data={api_token:this.api_token, url:this.myurl, rate:this.rate,  currency:this.currency,product_id:product_id,price:price,image:image,name:name};
+  console.log(data);
+  let myModal = this.modalCtrl.create(ProductModalPage,data);
+  console.log('click modal');
+  myModal.present();
+  console.log('Modal Producto');
+  
 
+  myModal.onDidDismiss(data => {
+    console.log('Saliendo');
+    this.countercarro();
+    
+    });
+}
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Por favor espere...",
@@ -41,7 +60,7 @@ export class HomePage {
 
   getrate()
   {
-    let urlapi=this.HttpService.url+"/index.php?route=api/custom/ratecurrency&api_token="+this.api_token;
+    let urlapi=this.myurl+"/index.php?route=api/custom/ratecurrency&api_token="+this.api_token;
  
     
     this.HttpService.httpr(urlapi).subscribe((data) => 
@@ -63,7 +82,7 @@ export class HomePage {
   countercarro()
   {
 
-    let urlapi=this.HttpService.url+"/index.php?route=api/custom/vproductscart&api_token="+this.api_token;
+    let urlapi=this.myurl+"/index.php?route=api/custom/vproductscart&api_token="+this.api_token;
     console.log(urlapi);
     console.log('COntando Items');
     this.HttpService.httpr(urlapi).subscribe((data) => 
@@ -89,7 +108,7 @@ export class HomePage {
 
     //let urlapi=this.HttpService.url+"/index.php?route=api/custom/products&api_token="+this.api_token;
     let micadena="&quantity="+quantity+"&product_id="+product_id;
-    let urlapi=this.HttpService.url+"/index.php?route=api/custom/addproductscart&api_token="+this.api_token+micadena;
+    let urlapi=this.myurl+"/index.php?route=api/custom/addproductscart&api_token="+this.api_token+micadena;
     console.log(urlapi);
     
     this.HttpService.httpr(urlapi).subscribe((data) => 
@@ -174,7 +193,7 @@ console.log('Symbol'+this.currency);
     this.HttpService.getBanner().subscribe((data) => 
     {
 
-      this.myurl=this.HttpService.url+'/image/';
+      this.myurl="https://elelook.com.ve/image/";
       
     this.banners = data['results'];
 
@@ -189,15 +208,7 @@ console.log('Symbol'+this.currency);
   loginapi()
   {
   
-   
-    if (this.api_token)
-    {
-      this.cargarProductos();
-      this.getcategorias();
- 
-    }
-    else
-    {
+
       this.HttpService.loginapi().subscribe((data) => 
       {
         this.api_token=data['api_token'];
@@ -210,7 +221,7 @@ console.log('Symbol'+this.currency);
       (error) =>{ 
       console.error(error);
       });
-    }
+
 }
 
   cargarProductos()

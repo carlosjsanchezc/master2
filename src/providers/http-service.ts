@@ -5,10 +5,11 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class HttpService 
 {
-  api_token:string;
-  url="https://www.dc2.com.ve/opencart/upload";
+ 
+  url="https://elelook.com.ve";
  // url="https://localhost/upload";
   categorias:any[]=[];
+  isloging=false;
   
 
   constructor(

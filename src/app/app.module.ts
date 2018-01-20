@@ -5,18 +5,22 @@ import { HttpService}  from '../providers/http-service'
 import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { LoginModalPage } from '../pages/login-modal/login-modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CartPopPage } from '../pages/cart-pop/cart-pop';
+import { ProductModalPage } from '../pages/product-modal/product-modal';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
-    CartPopPage
+
+    CartPopPage,
+    LoginModalPage,
+    ProductModalPage
   ],
   imports: [
     HttpClientModule,
@@ -27,8 +31,10 @@ import { CartPopPage } from '../pages/cart-pop/cart-pop';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
+
     CartPopPage,
+    LoginModalPage,
+    ProductModalPage
  
   ],
   providers: [
