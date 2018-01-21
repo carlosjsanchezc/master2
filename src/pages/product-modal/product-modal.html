@@ -13,7 +13,7 @@
       </ion-title>
     </ion-navbar>
   </ion-header>
-  <ion-content>
+  <ion-content padding="10px">
   <ion-col >
       <div text-center>
         <ion-slides *ngIf="images.length > 0"  autoplay="2000" loop="true" >
@@ -28,15 +28,23 @@
      <p style="font-size:2rem" text-center >{{name}}</p><br>
         Precio:{{currency}} {{price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
         <ion-row>
-          <ion-label>Cantidad</ion-label>
-          <ion-input type="number" [(ngModel)]="quantity"></ion-input>
+          <ion-label style="font-size:2rem">Cantidad</ion-label>
+          <ion-note item-end>
+          <input type="number" [(ngModel)]="quantity" style="text-align: end;" >
+          </ion-note>
         </ion-row>
-        <ion-item *ngFor="let custom of options">
-        <ion-label>{{custom.name}}</ion-label>
-        <ion-select multiple="false" [(ngModel)]="optionpick">
-            <ion-option  [value]='option.option_id' id="{{option.option_id}}" selected="false"  *ngFor="let option of custom.product_option_value; let k=index">{{option.name}}</ion-option>
-        </ion-select>
+        <ion-row>
+          <ion-item *ngFor="let custom of options">
+          
+          <ion-label style="font-size:2rem">{{custom.name}}</ion-label>
+          <ion-select multiple="false" [(ngModel)]="optionpick">
+              <ion-option selected [value]='option.product_option_value_id' id="{{custom.product_option_id}}{{option.product_option_value_id}}" selected="false"  *ngFor="let option of custom.product_option_value; let k=index">{{option.name}}
+
+              </ion-option>
+          </ion-select>
+        
       </ion-item>
+    </ion-row>
        <button ion-button bottom color="light" block (click)="agregacarro(product_id)" >Agregar<ion-icon  name="cart"></ion-icon></button>
  </ion-col>
 </ion-content>

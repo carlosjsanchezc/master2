@@ -13,6 +13,7 @@ import { CartPopPage } from '../pages/cart-pop/cart-pop';
 import { ProductModalPage } from '../pages/product-modal/product-modal';
 
 
+
 @NgModule({
   declarations: [
     MyApp,

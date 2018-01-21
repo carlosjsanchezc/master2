@@ -5,6 +5,8 @@ import { HttpService} from '../../providers/http-service'
 import { CartPopPage} from '../cart-pop/cart-pop';
 import { ProductModalPage } from '../product-modal/product-modal';
 
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -107,7 +109,8 @@ verproducto(product_id,price,image,name)
     this.accion='Agregando a carro..';
 
     //let urlapi=this.HttpService.url+"/index.php?route=api/custom/products&api_token="+this.api_token;
-    let micadena="&quantity="+quantity+"&product_id="+product_id;
+    let option="[]";
+    let micadena="&quantity="+quantity+"&product_id="+product_id+"&option="+option;
     let urlapi=this.myurl+"/index.php?route=api/custom/addproductscart&api_token="+this.api_token+micadena;
     console.log(urlapi);
     

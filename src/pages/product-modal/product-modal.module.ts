@@ -10,4 +10,4 @@ import { ProductModalPage } from './product-modal';
     IonicPageModule.forChild(ProductModalPage),
   ],
 })
-export class ProductModalModule {}
+export class ProductModalPageModule {}

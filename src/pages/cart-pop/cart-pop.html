@@ -76,6 +76,85 @@
           </ion-item>
         </ion-list>
     </ion-grid>
-
+    <div *ngIf="subtotal==0" text-center>
+      <ion-badge color="light">
+        <h1 text-center>El carrito está vacío</h1>
+      </ion-badge>
+    </div>
+  <div *ngIf="subtotal>0">
+    <h2 text-center>Datos para completar el pedido</h2>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input [(ngModel)]="nombre" type="text" name="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Apellido</ion-label>
+        <ion-input [(ngModel)]="apellido" type="text" name="apellido"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>email</ion-label>
+        <ion-input [(ngModel)]="email" type="email" name="apellido"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Teléfono</ion-label>
+          <ion-input [(ngModel)]="telefono" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Empresa</ion-label>
+          <ion-input [(ngModel)]="empresa" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Direccion 1</ion-label>
+          <ion-input [(ngModel)]="direccion1" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Dirección 2</ion-label>
+          <ion-input [(ngModel)]="direccion2" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Ciudad</ion-label>
+          <ion-input [(ngModel)]="ciudad" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Código Postal</ion-label>
+          <ion-input [(ngModel)]="codigopostal" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>País</ion-label>
+          <ion-select multiple="false" [(ngModel)]="country_id" (ionChange)="getzone($event)">
+            
+              
+              <ion-option *ngFor="let country of countries" selected [value]='country.country_id'  selected="false">{{country.name}}
+              </ion-option>
+          
+          </ion-select>          
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Estado/Región</ion-label>
+          <ion-select multiple="false" [(ngModel)]="zoneid" >
+              <ion-option *ngFor="let zone of zones" selected [value]='zone.zone_id'  selected="false">{{zone.name}}
+                </ion-option>
+          </ion-select>        
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Forma de Pago</ion-label>
+          <ion-select multiple="false" [(ngModel)]="formadepago" >
+              <ion-option  selected [value]='1'  selected="true">Depósito Bancario</ion-option>
+              <ion-option  selected [value]='2'  selected="false">Tarjeta de crédito</ion-option>
+              
+          </ion-select> 
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Observaciones</ion-label>
+          <ion-input [(ngModel)]="observaciones" type="textarea"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-buttons  color="light">
+        <button ion-button block color="light" (click)="putorder()">Colocar Orden</button>
+      </ion-buttons> 
+      </ion-item>
+    </ion-list>
+  </div>
   
 </ion-content>

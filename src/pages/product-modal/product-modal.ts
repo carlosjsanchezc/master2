@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
 import { HttpService} from '../../providers/http-service'
 
 
@@ -59,6 +59,16 @@ this.getimages();
     
 
     //let urlapi=this.HttpService.url+"/index.php?route=api/custom/products&api_token="+this.api_token;
+    console.log(JSON.stringify(options));
+    options=[];
+    options.push(this.options[0].product_option_id);
+    let op1=this.options[0].product_option_id;
+    let op2=this.optionpick;
+    options.push(this.optionpick);
+    console.log(this.optionpick);
+  
+  
+    console.log(options);
     let micadena="&quantity="+this.quantity.toString()+"&product_id="+product_id+"&option="+JSON.stringify(options);
     let urlapi=this.myurl+"/index.php?route=api/custom/addproductscart&api_token="+this.api_token+micadena;
     console.log(urlapi);
@@ -114,9 +124,12 @@ this.getoptions();
       console.log('url:'+urlapi);
       console.log(data);
       this.options=data['data'];
-
-      console.log(this.options);
-
+      if (this.options.length>0)
+      {
+        this.optionpick=this.options[0].product_option_value[0].product_option_value_id;
+        console.log(this.optionpick);
+        console.log(this.options);
+      }
       //this.rate=data['value'];
     },
     (error) =>{ 
