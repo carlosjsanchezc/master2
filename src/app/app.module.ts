@@ -26,7 +26,13 @@ import { ProductModalPage } from '../pages/product-modal/product-modal';
   imports: [
     HttpClientModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+			platforms: {
+				ios: {
+					backButtonText: 'Volver'
+				}
+			}
+		}),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

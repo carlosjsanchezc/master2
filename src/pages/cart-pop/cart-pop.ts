@@ -177,8 +177,8 @@ putorder()
   urlapi=urlapi+"&email="+this.email;
   urlapi=urlapi+"&telefono="+this.telefono;
   urlapi=urlapi+"&direccion1="+this.direccion1;
-  urlapi=urlapi+"&direccion2="+this.direccion2;
-  urlapi=urlapi+"&empresa="+this.empresa;
+  urlapi=urlapi+"&direccion2="+encodeURI(this.direccion2);
+  urlapi=urlapi+"&empresa="+encodeURI(this.empresa);
   urlapi=urlapi+"&ciudad="+this.ciudad;
   urlapi=urlapi+"&codigopostal="+this.codigopostal;
   urlapi=urlapi+"&pais="+this.country;
@@ -202,7 +202,7 @@ putorder()
    let alert = this.AlertController.create({
     title: 'Mensaje',
     subTitle: 'La compra se ha realizado con éxito su número de orden es:'+data['results'],
-    buttons: ['Dismiss']
+    buttons: ['Ok']
   });
   alert.present();
   this.viewCtrl.dismiss();
@@ -212,7 +212,7 @@ putorder()
     let alert = this.AlertController.create({
       title: 'Error',
       subTitle: 'Error:'+JSON.stringify(error),
-      buttons: ['Dismiss']
+      buttons: ['Ok']
     });
     alert.present();
     });
@@ -222,6 +222,20 @@ putorder()
 
   vercarro()
   {
+
+    this.nombre=this.HttpService.customername;
+    this.apellido=this.HttpService.customerlastname;
+    this.telefono=this.HttpService.customertelephone;
+    this.ciudad=this.HttpService.customercity;
+    this.empresa=this.HttpService.customercity;
+    this.codigopostal=this.HttpService.customerpostcode;
+    this.country_id=this.HttpService.customercountryid;
+    this.zoneid=this.HttpService.customerzoneid;
+    this.direccion1=this.HttpService.customeraddress1;
+    this.direccion2=this.HttpService.customeraddress2;
+    this.email=this.HttpService.customeremail;
+
+
 
     //*************** FILLING CART */
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/vproductscart&api_token="+this.api_token;

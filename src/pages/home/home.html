@@ -22,7 +22,7 @@
 <ion-content padding>
  
 <div >
-    <ion-slides *ngIf="banners.length > 0"  autoplay="2000" loop="true" >
+    <ion-slides pager *ngIf="banners.length > 0"  autoplay="2000" loop="true" >
         <ion-slide *ngFor="let p of banners">
           <img src="{{myurl+p.image}}" />
         </ion-slide>

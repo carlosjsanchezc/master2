@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,ModalController } from 'ionic-angular';
+import { Nav, Platform,ModalController,MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -22,11 +22,13 @@ export class MyApp {
   api_token:string;
   pages: any[]=[];
   showLevel1 = null;
-showLevel2 = null;
+  showLevel2 = null;
+  usuario:string;
+
   v:any[]=[ ' '];
   url="https://elelook.com.ve";
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
+  constructor(public platform: Platform,public menuCtrl: MenuController, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -39,13 +41,10 @@ showLevel2 = null;
     let myModal = this.modalCtrl.create(LoginModalPage);
       console.log('click modal');
       myModal.present();
-      console.log('Modal presentado');
-      
-  
       myModal.onDidDismiss(data => {
         console.log('Saliendo');
-        
-        
+
+        this.usuario=data['email'];
         });
   }
 
@@ -100,6 +99,15 @@ menuItemHandler() {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+  pushpage(categid)
+  {
+    console.log(categid);
+    this.nav.push(HomePage, {
+      categid: categid
+  });
+  this.menuCtrl.close();
+
   }
   getcategorias()
     {

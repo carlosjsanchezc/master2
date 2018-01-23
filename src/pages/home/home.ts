@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,LoadingController,ModalController, AlertController } from 'ionic-angular';
+import { NavParams, NavController,LoadingController,ModalController, AlertController } from 'ionic-angular';
 import { HttpService} from '../../providers/http-service'
 
 import { CartPopPage} from '../cart-pop/cart-pop';
@@ -22,15 +22,22 @@ export class HomePage {
   losrows=0;
   accion='';
   productsgrid:any[]=[];
+  categid:number;
   myurl="https://elelook.com.ve";
 
   public api_token:string;
-  constructor(public navCtrl: NavController, public HttpService:HttpService,public loadingCtrl: LoadingController,public modalCtrl: ModalController, public alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public HttpService:HttpService,public loadingCtrl: LoadingController,public modalCtrl: ModalController, public alertCtrl:AlertController) {
     this.api_token='';
     this.rate=0;
     this.loginapi();
     this.cargarBanner();
+    this.categid=0;
+    this.categid=this.navParams.get('categid');
+    if (this.categid)
+    {
+      console.log('Categid:'+this.categid.toString());
 
+    }
     //this.presentLoading();
 
   }
@@ -215,6 +222,7 @@ console.log('Symbol'+this.currency);
       this.HttpService.loginapi().subscribe((data) => 
       {
         this.api_token=data['api_token'];
+        this.HttpService.api_token=this.api_token;
         this.getrate();
          this.cargarProductos();
        
@@ -229,8 +237,14 @@ console.log('Symbol'+this.currency);
 
   cargarProductos()
   {
-
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/products&api_token="+this.api_token;
+    
+    if (this.categid)
+    {   console.log('Entro a categorías');
+    console.log(this.categid);
+        urlapi=this.HttpService.url+"/index.php?route=api/custom/productscateg&api_token="+this.api_token+"&categid="+this.categid;
+    
+    }
     this.HttpService.getProducts(urlapi).subscribe((data) => 
     {
 
