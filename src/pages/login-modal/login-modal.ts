@@ -92,6 +92,15 @@ export class LoginModalPage {
 
           
           console.log('Iniciada session');
+        } 
+        else
+        {
+          let alert = this.AlertController.create({
+            title: 'Mensaje',
+            subTitle: 'El usuario no se encuentra o la clave está errada',
+            buttons: ['Ok']
+          });
+          alert.present();
         }
       
 

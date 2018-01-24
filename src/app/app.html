@@ -12,21 +12,21 @@
   </ion-header>
 
   <ion-content>
-      <ion-list id="sidenav" inset >
+      <ion-list id="sidenav" no-lines style="font-size: 1.2rem;max-height:60px;padding:0px">
       <button menuClose ion-item><ion-icon name="home"></ion-icon>Home</button>
       <button menuClose ion-item (click)="loginform()"><ion-icon name="person" ></ion-icon>Login</button>
       <ion-list-header>
         <ion-icon name="basket"></ion-icon>Categorías
       </ion-list-header>        
-      <ion-item *ngFor="let p of pages; let i=index" text-wrap  style="font-size: 1.2rem" (click)="pushpage(p.category_id)">
-      {{p.name}} <ion-icon (click)="toggleLevel1('idx'+i)" [ngClass]="{active: isLevel1Shown('idx'+i)}" *ngIf="p.parents.length>0" color="success" item-right [name]="isLevel1Shown('idx'+i) ? 'arrow-dropdown' : 'arrow-dropright-circle'"></ion-icon>
-      <ion-list *ngIf="isLevel1Shown('idx'+i)" >
-          <ion-item *ngFor="let m of p.parents"  style="font-size: 1rem" text-wrap (click)="pushpage(m.category_id)">
-            {{m.name}}
-          </ion-item>
-        </ion-list>
-      </ion-item>
-    </ion-list>
+        <ion-item *ngFor="let p of pages; let i=index" text-wrap   >
+          <label  ion-item (click)="pushpage(p.category_id)" style="font-size:1.2rem">{{p.name}} </label><ion-icon (click)="toggleLevel1('idx'+i)" [ngClass]="{active: isLevel1Shown('idx'+i)}" *ngIf="p.parents.length>0" color="success" item-right [name]="isLevel1Shown('idx'+i) ? 'arrow-dropdown' : 'arrow-dropright-circle'"></ion-icon>
+          <ion-list *ngIf="isLevel1Shown('idx'+i)" >
+            <ion-item *ngFor="let m of p.parents"  text-wrap>
+                <button menuClose ion-item (click)="pushpage(m.category_id)" style="font-size:1rem">{{m.name}}</button>
+            </ion-item>
+          </ion-list>
+        </ion-item>
+      </ion-list>
     
   </ion-content>
 

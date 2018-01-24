@@ -66,7 +66,10 @@ verproducto(product_id,price,image,name)
     loader.present();
     
   }
-
+  refresh()
+  {
+    this.loginapi();
+  }
   getrate()
   {
     let urlapi=this.myurl+"/index.php?route=api/custom/ratecurrency&api_token="+this.api_token;
@@ -199,7 +202,7 @@ console.log('Symbol'+this.currency);
 
   cargarBanner()
   {
-
+    
     this.HttpService.getBanner().subscribe((data) => 
     {
 

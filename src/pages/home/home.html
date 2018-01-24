@@ -9,11 +9,12 @@
         </div>
       </ion-title>
       <ion-buttons end>
+          <button ion-button icon-left (click)="refresh()">
+              <ion-icon name="refresh"  item-end ></ion-icon>
+           </button>
         <button ion-button icon-left (click)="vercarro()">
           <ion-icon name="cart"  item-end ><ion-badge color="dark">{{countcart}}</ion-badge></ion-icon>
-        
-  
-        </button>
+       </button>
       </ion-buttons>
     </ion-navbar>
     <ion-searchbar showCancelButton (ionInput)="filterProducts($event)" color="danger"  placeholder="Búsqueda" (ionClear)="clearBusq($event)"></ion-searchbar>
@@ -24,7 +25,9 @@
 <div >
     <ion-slides pager *ngIf="banners.length > 0"  autoplay="2000" loop="true" >
         <ion-slide *ngFor="let p of banners">
+           <p text-center text-color="light" >{{p.title}}</p><br>
           <img src="{{myurl+p.image}}" />
+        
         </ion-slide>
       </ion-slides>
 
