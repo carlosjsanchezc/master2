@@ -61,12 +61,17 @@ this.getimages();
     //let urlapi=this.HttpService.url+"/index.php?route=api/custom/products&api_token="+this.api_token;
     console.log(JSON.stringify(options));
     options=[];
+    if (this.options.length>0)
+    {
+      
     options.push(this.options[0].product_option_id);
     let op1=this.options[0].product_option_id;
     let op2=this.optionpick;
     options.push(this.optionpick);
     console.log(this.optionpick);
-  
+    
+    }
+    
   
     console.log(options);
     let micadena="&quantity="+this.quantity.toString()+"&product_id="+product_id+"&option="+JSON.stringify(options);
@@ -77,8 +82,13 @@ this.getimages();
     {
       console.log(this.api_token);
 
-
-      
+      let alert = this.AlertController.create({
+        title: 'Mensaje',
+        subTitle: 'Item agregado al carro',
+        buttons: ['Ok']
+      });
+      alert.present();
+      this.viewCtrl.dismiss();
 
     },
     (error) =>{ 

@@ -35,34 +35,30 @@
     <div *ngIf="isloginlogic">
         <form (submit)="doregister()" autocomplete="off">
             <ion-item>
-              <ion-label stacked style="font-size: 2rem"> Usuario</ion-label>
-              <ion-input  name="username" type="text" placeholder="Usuario" ></ion-input>
+              <ion-label stacked style="font-size: 2rem"> email</ion-label>
+              <ion-input [(ngModel)]="rusername" name="username" type="text" placeholder="Usuario" ></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked style="font-size: 2rem">Password</ion-label>
-              <ion-input  name="password" type="password" placeholder="Password"></ion-input>
+              <ion-input [(ngModel)]="rpassword" name="password" type="password" placeholder="Password"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked style="font-size: 2rem"> Nombre</ion-label>
-              <ion-input  name="username" type="text" placeholder="Usuario" ></ion-input>
+              <ion-input [(ngModel)]="rnombre" name="nombre" type="text" placeholder="Nombre" ></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked style="font-size: 2rem"> Apellidos</ion-label>
-                <ion-input  name="username" type="text" placeholder="Usuario" ></ion-input>
+                <ion-input  [(ngModel)]="rapellido" name="apellido" type="text" placeholder="Apellido" ></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label stacked style="font-size: 2rem">Teléfono</ion-label>
-                <ion-input  name="username" type="text" placeholder="Usuario" ></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label stacked style="font-size: 2rem">e-mail</ion-label>
-                <ion-input  name="username" type="email" placeholder="Usuario" ></ion-input>
+                <ion-input  [(ngModel)]="rtelefono" name="telefono" type="text" placeholder="Teléfono" ></ion-input>
             </ion-item>
             
 
-            <button ion-button block type="submit" color="light">
-              Enviar
+            <button ion-button block (click)="registrar()" type="submit" color="light">
+              Registrar
             </button>
             <button ion-button block (click)="logiclog()" color="light">Volver Login</button>
           </form>

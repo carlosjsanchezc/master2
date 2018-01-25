@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginModalPage } from '../pages/login-modal/login-modal';
-
+import { OneSignal } from '@ionic-native/onesignal';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CartPopPage } from '../pages/cart-pop/cart-pop';
@@ -48,6 +48,7 @@ import { ProductModalPage } from '../pages/product-modal/product-modal';
     StatusBar,
     SplashScreen,
     HttpService,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

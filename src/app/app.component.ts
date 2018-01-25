@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,ModalController,MenuController } from 'ionic-angular';
+import { Nav, Platform,ModalController,MenuController,AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,7 +9,7 @@ import { HttpService} from '../providers/http-service';
 import { LoginModalPage } from '../pages/login-modal/login-modal';
 import { ProductModalPage } from '../pages/product-modal/product-modal';
 import { CartPopPage } from '../pages/cart-pop/cart-pop';
-
+import { OneSignal } from '@ionic-native/onesignal';
 
 
 @Component({
@@ -24,18 +24,33 @@ export class MyApp {
   showLevel1 = null;
   showLevel2 = null;
   usuario:string;
-
+  onesignalkey='4e4c808c-1718-4b01-a756-d9b95133a428';
   v:any[]=[ ' '];
   url="https://elelook.com.ve";
 
-  constructor(public platform: Platform,public menuCtrl: MenuController, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
+  constructor(public platform: Platform,private alertCtrl: AlertController,public menuCtrl: MenuController,private oneSignal: OneSignal, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-
+    this.handlerNotifications();
 
   }
 
+  private handlerNotifications(){
+    this.oneSignal.startInit('528befa4-b101-425a-a86d-677de4c27ef1', '564553849534');
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+    this.oneSignal.handleNotificationOpened()
+    .subscribe(jsonData => {
+      let alert = this.alertCtrl.create({
+        title: jsonData.notification.payload.title,
+        subTitle: jsonData.notification.payload.body,
+        buttons: ['OK']
+      });
+      alert.present();
+      console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+    });
+    this.oneSignal.endInit();
+  }
   loginform()
   {
     let myModal = this.modalCtrl.create(LoginModalPage);
@@ -44,7 +59,6 @@ export class MyApp {
       myModal.onDidDismiss(data => {
         console.log('Saliendo');
 
-        this.usuario=data['email'];
         });
   }
 
