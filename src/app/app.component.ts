@@ -54,6 +54,56 @@ export class MyApp {
     });
     this.oneSignal.endInit();
   }
+  showPrompt() {
+    let prompt = this.alertCtrl.create({
+      title: 'Enviar Mensaje Masivo',
+      message: "Introduzca Titulo y mensaje",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Título'
+        },
+        {
+          name: 'msj',
+          placeholder: 'Mensaje'
+          
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Enviar',
+          handler: data => {
+            console.log('Saved clicked');
+
+            let urlapi="http://www.elelook.com.ve/apionesignal.php?msj="+data['msj']+"&titulo="+data['title'];
+ 
+    
+            this.HttpService.httpr(urlapi).subscribe((data) => 
+            {
+              console.log(this.api_token);
+              console.log('url:'+urlapi);
+              console.log(data);
+
+              //this.rate=data['value'];
+            },
+            (error) =>{ 
+             
+            console.error(error);
+            });
+
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
   loginform()
   {
     let myModal = this.modalCtrl.create(LoginModalPage);

@@ -46,7 +46,7 @@ export class LoginModalPage {
   register()
   {
     this.api_token=this.HttpService.api_token;
-    let params="&username="+this.rusername+"&password="+this.password+"&nombre="+this.rnombre+"&apellido="+this.rapellido+"&telefono="+this.rtelefono;
+    let params="&username="+this.rusername+"&password="+this.rpassword+"&nombre="+this.rnombre+"&apellido="+this.rapellido+"&telefono="+this.rtelefono;
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/registercustomer&api_token="+this.api_token+params;
 
  
