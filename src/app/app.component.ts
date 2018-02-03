@@ -7,8 +7,8 @@ import { HomePage } from '../pages/home/home';
 //import { ListPage } from '../pages/list/list';
 import { HttpService} from '../providers/http-service';
 import { LoginModalPage } from '../pages/login-modal/login-modal';
-import { ProductModalPage } from '../pages/product-modal/product-modal';
-import { CartPopPage } from '../pages/cart-pop/cart-pop';
+
+
 import { OneSignal } from '@ionic-native/onesignal';
 
 
@@ -24,21 +24,24 @@ export class MyApp {
   showLevel1 = null;
   showLevel2 = null;
   usuario:string;
-  onesignalkey='4e4c808c-1718-4b01-a756-d9b95133a428';
+  onesignalkey='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
+  appid='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
   v:any[]=[ ' '];
   url="https://elelook.com.ve";
 
-  constructor(public platform: Platform,private alertCtrl: AlertController,public menuCtrl: MenuController,private oneSignal: OneSignal, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
+  constructor(public platform: Platform,private alertCtrl: AlertController, public oneSignal:OneSignal,public menuCtrl: MenuController, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.handlerNotifications();
-
+ 
   }
 
   private handlerNotifications(){
-    this.oneSignal.startInit('528befa4-b101-425a-a86d-677de4c27ef1', '564553849534');
+   // this.oneSignal.setLogLevel({logLevel:5,visualLevel:5});
+    this.oneSignal.startInit('5915c91a-9dbe-48d3-9b0d-2d856aff9d82', '739069976440');
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+    this.oneSignal.setSubscription(true);
     this.oneSignal.handleNotificationOpened()
     .subscribe(jsonData => {
       let alert = this.alertCtrl.create({

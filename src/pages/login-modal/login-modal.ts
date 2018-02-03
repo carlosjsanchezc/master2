@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
+import {  NavController,ViewController, AlertController } from 'ionic-angular';
 import { HttpService} from '../../providers/http-service'
 
 
@@ -35,7 +35,7 @@ export class LoginModalPage {
   datosusuario:any[]=[];
   address:any[]=[];
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
   {
     console.log('Entrando a Modal');
     this.username='';

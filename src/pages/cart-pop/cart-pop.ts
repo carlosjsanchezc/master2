@@ -125,7 +125,7 @@ console.log('Symbol'+this.currency);
   }
   borrapos(i)
   {
-    let qty=this.micart[i].quantity;
+   
     let cartid=this.micart[i].cart_id;
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/delproductscart&api_token="+this.api_token+"&cart_id="+cartid.toString();
     console.log("Url:"+urlapi);

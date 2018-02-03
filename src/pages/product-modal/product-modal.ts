@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
+import {  NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
 import { HttpService} from '../../providers/http-service'
 
 
@@ -54,6 +54,30 @@ export class ProductModalPage {
 this.getimages();
   }
 
+  enviarmsj(msj,titulo)
+  {
+    let urlapi="www.elelook.com.ve/apionesignal.php?msj="+msj+"&titulo="+titulo;
+
+    this.HttpService.httpr(urlapi).subscribe((data) => 
+    {
+      console.log(this.api_token);
+
+      let alert = this.AlertController.create({
+        title: 'Mensaje',
+        subTitle: 'Mensaje Enviado con exito',
+        buttons: ['Ok']
+      });
+      alert.present();
+      this.viewCtrl.dismiss();
+
+    },
+    (error) =>{ 
+      
+    console.error(error);
+   
+    });
+
+  }
   agregacarro(product_id,quantity,options)
   {
     
@@ -65,8 +89,7 @@ this.getimages();
     {
       
     options.push(this.options[0].product_option_id);
-    let op1=this.options[0].product_option_id;
-    let op2=this.optionpick;
+
     options.push(this.optionpick);
     console.log(this.optionpick);
     

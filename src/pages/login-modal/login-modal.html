@@ -8,7 +8,7 @@
       </ion-buttons>
       <ion-title>
           <div text-center>
-            <img src="../assets/imgs/elelogo.png" height="40px">
+            <img src="assets/imgs/elelogo.png" height="40px">
           </div>
       </ion-title>
     </ion-navbar>
@@ -33,7 +33,7 @@
         </form>
     </div>
     <div *ngIf="isloginlogic">
-        <form (submit)="doregister()" autocomplete="off">
+        <form (submit)="register()" autocomplete="off">
             <ion-item>
               <ion-label stacked style="font-size: 2rem"> email</ion-label>
               <ion-input [(ngModel)]="rusername" name="username" type="text" placeholder="Usuario" ></ion-input>
@@ -57,7 +57,7 @@
             </ion-item>
             
 
-            <button ion-button block (click)="registrar()" type="submit" color="light">
+            <button ion-button block (click)="register()" type="submit" color="light">
               Registrar
             </button>
             <button ion-button block (click)="logiclog()" color="light">Volver Login</button>
