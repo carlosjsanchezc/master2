@@ -37,24 +37,37 @@
   
   <ion-grid>
      
-  <ion-row *ngFor="let posicion of productsgrid; let i=index" style="border-top: 1px solid #999; " color="dark">
-      <ion-col col-6 *ngIf="posicion[0]>=0" style="padding:1px;border-right:1px solid #999;font-size:1rem" >
+  <ion-row *ngFor="let posicion of productsgrid; let i=index"  color="dark" style="border:1px;padding:2px">
+      <ion-col col-6 *ngIf="posicion[0]>=0" style="font-size:1rem;" class="iboriti" >
            <div text-center>
             <img (click)="verproducto(products[posicion[0]].product_id,products[posicion[0]].price,products[posicion[0]].image,products[posicion[0]].name)" *ngIf="products[posicion[0]].image" [src]="myurl+products[posicion[0]].image" alt="" width="auto" height="100px">
           </div> 
-          <p style="font-size:1.5rem" text-center >{{products[posicion[0]].name}}</p><br>
+          <p style="font-size:1.3rem;font-weight: bold;" text-center >{{products[posicion[0]].name}}</p><br>
             Precio:{{currency}} {{products[posicion[0]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
-            <button ion-button bottom color="light" block (click)="agregacarro(products[posicion[0]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
-      </ion-col>
+            <br>
+          <br>
+          <br>
+          <br>
+          
+          <div style="position: absolute; bottom: 0px;right:0px;width:100%;padding:2px">
+            <button ion-button round small full color="light" (click)="agregacarro(products[posicion[0]].product_id,'1')" >Agregar  <ion-icon name="cart" style="padding:10px"></ion-icon></button>
+          </div>
+    </ion-col>
  
-    <ion-col col-6  *ngIf="posicion[1]>=0"  style="padding:1px;font-size:1rem"> 
+    <ion-col col-6  *ngIf="posicion[1]>=0"  style="font-size:1rem;padding:2px" class="iboriti"> 
           <div text-center> 
             <img (click)="verproducto(products[posicion[1]].product_id,products[posicion[1]].price,products[posicion[1]].image,products[posicion[1]].name)" *ngIf="products[posicion[1]].image" [src]="myurl+products[posicion[1]].image" alt=""  width="auto" height="100px">
           </div>   
-          <p text-center style="font-size:1.5rem">{{products[posicion[1]].name}}</p><br>
+          <p text-center style="font-size:1.3rem;font-weight: bold;">{{products[posicion[1]].name}}</p><br>
           Precio:{{currency}} {{products[posicion[1]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
-          <button ion-button color="light" bottom block (click)="agregacarro(products[posicion[1]].product_id,'1')" >Agregar<ion-icon  name="cart"></ion-icon></button>
-         
+          <br>
+          <br>
+          <br>
+          <br>
+          
+          <div style="position: absolute; bottom: 0px;right:0px;width:100%;padding:2px" >
+            <button ion-button round small full  color="light" (click)="agregacarro(products[posicion[1]].product_id,'1')" >Agregar  <ion-icon  name="cart" style="padding:10px"></ion-icon></button>
+          </div>
       
       
     </ion-col>

@@ -30,7 +30,7 @@ export class LoginModalPage {
   rnombre:string;
   rapellido:string;
   rtelefono:string;
-  
+  error:string;
 
   datosusuario:any[]=[];
   address:any[]=[];
@@ -56,7 +56,18 @@ export class LoginModalPage {
       console.log(this.api_token);
       console.log('url:'+urlapi);
       console.log(data);
-
+     
+      if (data['results']==true)
+      {
+        this.isloginlogic=false;
+      let alert = this.AlertController.create({
+        title: 'Mensaje',
+        subTitle: 'El usuario se ha registrado correctamente',
+        buttons: ['Ok']
+      });
+      alert.present();
+      this.error='';
+     }
     });
   }
 
@@ -82,7 +93,7 @@ export class LoginModalPage {
           this.HttpService.customeraddressid=this.datosusuario['address_id'];
           this.HttpService.customeremail=this.datosusuario['email'];
           let address_id=data['results']['address_id'];
-
+          this.error="";
 
           let urlapi=this.HttpService.url+"/index.php?route=api/custom/getaddress&api_token="+this.api_token+"&address_id="+address_id;
 
@@ -129,6 +140,7 @@ export class LoginModalPage {
             buttons: ['Ok']
           });
           alert.present();
+          this.error='El usuario no se encuentra o la clave está errada';
         }
       
 

@@ -28,10 +28,14 @@
      <p style="font-size:2rem" text-center >{{name}}</p><br>
         Precio:{{currency}} {{price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
         <ion-row>
-          <ion-label style="font-size:2rem">Cantidad</ion-label>
-          <ion-note item-end>
-          <input type="number" [(ngModel)]="quantity" style="text-align: end;" >
-          </ion-note>
+          <ion-col col-4>
+            <ion-label style="font-size:1.7rem">Cantidad</ion-label>
+          </ion-col>
+          <ion-col col-4>
+            <ion-note item-end>
+            <input type="number" [(ngModel)]="quantity" style="text-align: end;" >
+            </ion-note>
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-item *ngFor="let custom of options">

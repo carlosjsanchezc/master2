@@ -38,6 +38,7 @@ export class MyApp {
   }
 
   private handlerNotifications(){
+    /*
    // this.oneSignal.setLogLevel({logLevel:5,visualLevel:5});
     this.oneSignal.startInit('5915c91a-9dbe-48d3-9b0d-2d856aff9d82', '739069976440');
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
@@ -52,7 +53,7 @@ export class MyApp {
       alert.present();
       console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
     });
-    this.oneSignal.endInit();
+    this.oneSignal.endInit();*/
   }
   showPrompt() {
     let prompt = this.alertCtrl.create({
@@ -139,9 +140,10 @@ export class MyApp {
     }
   };
 
-menuItemHandler() {
+  menuItemHandler() {
   this.showSubmenu = !this.showSubmenu;
-}
+  }
+
   initializeApp() {
     this.pages = [     
     ];
@@ -157,14 +159,9 @@ menuItemHandler() {
     },(error) =>{ 
       console.error(error);
       });
-
-
-
-
-    this.platform.ready().then(() => {
-  
+      this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      //this.splashScreen.hide();
     });
   }
   pushpage(categid)

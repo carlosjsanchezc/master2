@@ -77,6 +77,9 @@ verproducto(product_id,price,image,name)
     
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
+      if (data['error']){
+        this.loginapi();
+      }
       console.log(this.api_token);
       console.log('url:'+urlapi);
       console.log(data);
@@ -87,6 +90,8 @@ verproducto(product_id,price,image,name)
     (error) =>{ 
       this.accion='Error al cargar moneda Bs'+JSON.stringify(error);
     console.error(error);
+    this.loginapi();
+    
     });
 
   }
@@ -101,6 +106,9 @@ verproducto(product_id,price,image,name)
     {
       console.log(this.api_token);
       this.countcart=0;
+      if (data['error']){
+        this.loginapi();
+      }
       console.log(data);
       if (data['results'])
       {
@@ -109,6 +117,8 @@ verproducto(product_id,price,image,name)
 
     },
     (error) =>{ 
+      this.loginapi();
+    
       console.log('error');
     });
 
@@ -127,13 +137,17 @@ verproducto(product_id,price,image,name)
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
       console.log(this.api_token);
-
+      if (data['error']){
+        this.loginapi();
+      }
       this.accion='Item agregado con exito';
       this.countercarro();
       
 
     },
     (error) =>{ 
+      this.loginapi();
+    
       this.accion=urlapi+'- item:'+JSON.stringify(error);
     console.error(error);
     let loader = this.loadingCtrl.create({
@@ -176,6 +190,9 @@ console.log('Symbol'+this.currency);
     
     this.HttpService.getCategorias(urlapi).subscribe((data) => 
     {
+      if (data['error']){
+        this.loginapi();
+      }
       console.log('Categorias');
       this.categorias=[];
       console.log(data['success']);
@@ -196,6 +213,8 @@ console.log('Symbol'+this.currency);
 
     },
     (error) =>{ 
+      this.loginapi();
+    
     console.error(error);
     });
   }
@@ -250,7 +269,9 @@ console.log('Symbol'+this.currency);
     }
     this.HttpService.getProducts(urlapi).subscribe((data) => 
     {
-
+      if (data['error']){
+        this.loginapi();
+      }
     delete this.products;
     this.products=[];
     Object.keys(data).map(e => this.products.push(data[e]));
@@ -301,6 +322,8 @@ console.log('Symbol'+this.currency);
     },
     (error) =>{
     console.error(error);
+  
+
     });
   }
   clearBusq(ev: any) {

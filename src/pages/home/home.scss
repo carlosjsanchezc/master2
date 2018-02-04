@@ -6,4 +6,15 @@ page-home {
         background-size: cover;
     
     }
+    .button {
+        align-self: flex-end;
+      }
+
+      .iboriti {
+          
+        border: 1px solid #f007aa;
+        pointer-events: none;
+        font-style: italic;
+        border-radius: 5px 5px 5px 5px;
+      }
     }

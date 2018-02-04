@@ -81,6 +81,7 @@ console.log('Symbol'+this.currency);
       
       },
       (error) =>{ 
+        
         //this.accion=urlapi+'- item:'+JSON.stringify(error);
       console.error(error);
       let alert = this.AlertController.create({
