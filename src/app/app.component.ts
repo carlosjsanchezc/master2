@@ -18,6 +18,8 @@ import { OneSignal } from '@ionic-native/onesignal';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   showSubmenu: boolean = false;
+  submenus:any[]=[];
+  showsubmenus:any[]=[];
   rootPage: any = HomePage;
   api_token:string;
   pages: any[]=[];
@@ -26,6 +28,7 @@ export class MyApp {
   usuario:string;
   onesignalkey='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
   appid='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
+ 
   v:any[]=[ ' '];
   url="https://elelook.com.ve";
 
@@ -36,6 +39,8 @@ export class MyApp {
     this.handlerNotifications();
  
   }
+
+
 
   private handlerNotifications(){
     /*
@@ -111,34 +116,17 @@ export class MyApp {
       console.log('click modal');
       myModal.present();
       myModal.onDidDismiss(data => {
+        console.log('datos del modal');
+        console.log(data);
+        if (data){
+          this.usuario=data['firstname']+' '+data['lastname'];
+        
+        }
         console.log('Saliendo');
 
         });
   }
 
-  isLevel1Shown(idx) {
-    return this.showLevel1 === idx;
-  };
-
-  isLevel2Shown(idx) {
-    return this.showLevel2 === idx;
-  };
-  toggleLevel2(idx) {
-    if (this.isLevel2Shown(idx)) {
-      this.showLevel1 = null;
-      this.showLevel2 = null;
-    } else {
-      this.showLevel1 = idx;
-      this.showLevel2 = idx;
-    }
-  };
-  toggleLevel1(idx) {
-    if (this.isLevel1Shown(idx)) {
-      this.showLevel1 = null;
-    } else {
-      this.showLevel1 = idx;
-    }
-  };
 
   menuItemHandler() {
   this.showSubmenu = !this.showSubmenu;
@@ -164,11 +152,14 @@ export class MyApp {
       //this.splashScreen.hide();
     });
   }
-  pushpage(categid)
+  cambiasubmenu(i){
+    this.showsubmenus[i]=!this.showsubmenus[i];
+  }
+  pushpage(categid,name)
   {
     console.log(categid);
     this.nav.push(HomePage, {
-      categid: categid
+      categid: categid, name:name
   });
   this.menuCtrl.close();
 
@@ -186,7 +177,16 @@ export class MyApp {
       this.pages=data['success']['products'];
       console.log('Categorias');
       console.log(this.pages);
-      
+      for (let index = 0; index < this.pages.length; index++) {
+        this.submenus[index]=false;
+        this.showsubmenus[index]=false;
+        if (this.pages[index].parents.length>0){
+          this.submenus[index]=true;
+        }
+
+        
+      }
+      console.log(this.submenus);
       
      // this.pages=data['success']['products'];
      // HttpService.categorias=this.categorias;

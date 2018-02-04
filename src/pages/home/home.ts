@@ -21,6 +21,7 @@ export class HomePage {
   countcart=0;
   losrows=0;
   accion='';
+  categname:string;
   productsgrid:any[]=[];
   categid:number;
   myurl="https://elelook.com.ve";
@@ -33,6 +34,8 @@ export class HomePage {
     this.cargarBanner();
     this.categid=0;
     this.categid=this.navParams.get('categid');
+    this.categname=this.navParams.get('name');
+    
     if (this.categid)
     {
       console.log('Categid:'+this.categid.toString());

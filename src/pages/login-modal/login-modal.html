@@ -17,7 +17,7 @@
 <ion-content padding >
     
     <div *ngIf="!isloginlogic" >
-        <form (submit)="doLogin()" autocomplete="off">
+ 
           <ion-item>
             <ion-label stacked style="font-size: 2rem"><ion-icon name="contact" ></ion-icon> Usuario</ion-label>
             <ion-input [(ngModel)]="username" name="username" type="text" placeholder="Usuario" ></ion-input>
@@ -29,16 +29,14 @@
           <ion-item *ngIf="error">
             <ion-badge item-end>{{error}}</ion-badge>
           </ion-item>
-          <button ion-button block type="submit" color="light">
+          <button ion-button block (click)="doLogin()" color="light">
             Login
           </button>
           <button ion-button block (click)="logiclog()" color="dark">Registro</button>
 
-        </form>
     </div>
     <div *ngIf="isloginlogic">
-        <form (submit)="register()" autocomplete="off">
-            <ion-item>
+             <ion-item>
               <ion-label stacked style="font-size: 2rem"> email</ion-label>
               <ion-input [(ngModel)]="rusername" name="username" type="text" placeholder="Usuario" ></ion-input>
             </ion-item>
@@ -64,8 +62,8 @@
             <button ion-button block (click)="register()" type="submit" color="light">
               Registrar
             </button>
-            <button ion-button block (click)="logiclog()" color="light">Volver Login</button>
-          </form>
+            <button ion-button block (click)="logiclog()" color="dark">Volver Login</button>
+
  
     </div>
 </ion-content>

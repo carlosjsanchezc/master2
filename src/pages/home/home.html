@@ -5,6 +5,7 @@
       </button>
       <ion-title>
         <div text-center>
+       
         <img src="assets/imgs/elelogo.png" height="40px">
         </div>
       </ion-title>
@@ -21,7 +22,10 @@
   </ion-header>
 
 <ion-content padding>
- 
+<div *ngIf="categid" text-center>
+  <h1>{{categname}}</h1>
+    
+</div> 
 <div >
     <ion-slides pager *ngIf="banners.length > 0"  autoplay="2000" loop="true" >
         <ion-slide *ngFor="let p of banners">
