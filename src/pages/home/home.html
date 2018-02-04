@@ -30,7 +30,7 @@
     <ion-slides pager *ngIf="banners.length > 0"  autoplay="2000" loop="true" >
         <ion-slide *ngFor="let p of banners">
            <p text-center text-color="light" >{{p.title}}</p><br>
-          <img src="{{myurl+p.image}}" />
+          <img [src]="myurl+p.image" alt="" width="80px" height="220px" style="height:180px">
         
         </ion-slide>
       </ion-slides>
