@@ -88,11 +88,19 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Nombre</ion-label>
-        <ion-input [(ngModel)]="nombre" type="text" name="nombre"></ion-input>
+        <ion-input [(ngModel)]="nombre" type="text" name="nombre" (input)='validaespeciales($event)'></ion-input>
+      </ion-item>
+      <ion-item *ngIf="validaciones[0].length>0">
+          {{validaciones[0]}}
+
       </ion-item>
       <ion-item>
         <ion-label floating>Apellido</ion-label>
-        <ion-input [(ngModel)]="apellido" type="text" name="apellido"></ion-input>
+        <ion-input [(ngModel)]="apellido" type="text" name="apellido" (input)='validaespeciales($event)'></ion-input>
+      </ion-item>
+      <ion-item *ngIf="validaciones[1].length>0">
+          {{validaciones[1]}}
+
       </ion-item>
       <ion-item>
         <ion-label floating>email</ion-label>
@@ -127,7 +135,7 @@
           <ion-select multiple="false" [(ngModel)]="country_id" (ionChange)="getzone($event)">
             
               
-              <ion-option *ngFor="let country of countries" selected [value]='country.country_id'  selected="false">{{country.name}}
+              <ion-option *ngFor="let country of countries" [value]='country.country_id'  selected="false">{{country.name}}
               </ion-option>
           
           </ion-select>          
@@ -141,35 +149,35 @@
       </ion-item>
       <ion-item>
           <ion-label floating>Forma de Pago</ion-label>
-          <ion-select multiple="false" [(ngModel)]="formadepago" (ionChange)="validarlogin()" >
-              <ion-option  selected [value]='1'  selected="false">Transferencia Bancaria</ion-option>
-              <ion-option  selected [value]='2'  selected="false">Tarjeta de crédito</ion-option>
+          <ion-select id="formadepago" interface="action-sheet" multiple="false" [(ngModel)]="formadepago" (ionChange)="validarlogin($event)" >
+              <ion-option  value=1>Transferencia Bancaria</ion-option>
+              <ion-option  value=2>Tarjeta de crédito</ion-option>
               
           </ion-select> 
       </ion-item>
       <div *ngIf="formadepago==1">
           <ion-item>
-            <h2>INVERSIONES ELEANA'S, C.A.</h2>
-            <h2>RIF: J-402029424-1</h2>
+            <h2>Eleana Osuna M.</h2>
+            <h2>V-16.793.377</h2>
             <h3>correo:eleanacarolinaosuna@gmail.com</h3>
           </ion-item>
           <ion-item>
               <img src="assets/imgs/banesco.jpg" height="40px">
               <ion-note color="dark" item-end>
-              0134-0057-16-0571017304
+              0134-0057-11-0573015103
               </ion-note>
           </ion-item>
           <ion-item>
               <img src="assets/imgs/bdv.jpg" height="40px">
               <ion-note color="dark" item-end>
-              0102-0334-19-0000249434
+              0102-0856-4100-00054056
               </ion-note>
           </ion-item>
 
           <ion-item>
               <img src="assets/imgs/bod.jpg" weight="60px">
               <ion-note color="dark" item-end>
-              0116-0133-28-0016500580
+              0116-0133-21-0023200383
               </ion-note>
           </ion-item>
       <ion-item>

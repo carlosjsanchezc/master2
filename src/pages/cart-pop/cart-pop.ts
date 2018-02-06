@@ -49,14 +49,24 @@ export class CartPopPage {
   cvc:string;
   expirationdate:String=new Date().toISOString();
   voucher:string;
-  formadepago:string;
+  formadepago:any;
   meses:any[]=[];
   anios:any[]=[];
   islogged:boolean;
+  validaciones:any[]=[];
 
  
   constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
   {
+    for (let index = 0; index < 10; index++) {
+      this.validaciones[index]='';
+      
+    }
+    this.nombre='';
+    this.apellido='';
+    this.email='';
+    this.telefono='';
+
     this.islogged=this.HttpService.isloging;
     console.log('Entrando a Modal');
     this.api_token='';
@@ -65,44 +75,61 @@ export class CartPopPage {
     this.currency = this.navParams.get('currency');
     this.rate=this.navParams.get('rate');
     let an:string;
-    this.formadepago='1';
+    this.formadepago=1;
     an=Date();
-
-    console.log('V:'+this.expirationdate);
-    console.log(an);
     an=an.substring(11,15);
-
-console.log('Expiration:');
-console.log(this.expirationdate);
-    
-    
-    console.log(an);
     for (let index = 0; index < 11; index++) {
       this.meses[index]=index+1;
       this.anios[index]=(parseInt(an)+index);
       
     }
-console.log(this.meses);
-console.log(this.anios);
-console.log('Rate:'+this.rate);
-console.log('Symbol'+this.currency);
-  
-    console.log('token:'+this.api_token);
-    console.log('url:'+this.miurl);
+
     this.vercarro();
   }
+  validacampos()
+  {
+
+    if (this.nombre.length==0)
+    {
+      this.validaciones[0]='El nombre no puede estar vacío';
+      console.log(this.validaciones[0]);
+    }
+
+      if (this.apellido.length==0)
+      {
+      this.validaciones[1]='El Apellido no puede estar vacío';
+      }
+
+    }
+
+
+
+
   
-  validarlogin(){
-    if ((!this.islogged)&&(this.formadepago!='1')){
-      this.formadepago='1';
+  validarlogin(ev){
+    this.islogged=this.HttpService.isloging;
+    console.log('Forma de Pago');
+    console.log(this.formadepago);
+    console.log('Event');
+    console.log(ev);
+    if ((!this.islogged)&&(ev!=1)){
+      
       let alert = this.AlertController.create({
         title: 'Error en forma de pago',
         subTitle: 'Para pagar con tarjeta de crédito usted debe estar registrado y loggeado',
         buttons: ['OK']
       });
-   
+      console.log('corregir');
+      console.log(this.formadepago);
+      this.formadepago=1;
+      ev=1;
+    
+      console.log('corregir');
+      console.log(this.formadepago);
+      this.formadepago=1;
+
       alert.present();
-      
+      return 1;
      
     }
   }
@@ -113,15 +140,11 @@ console.log('Symbol'+this.currency);
 
   validaespeciales(valor){
     let a=valor.target.value;
-    console.log('Valor a validar:');
-    console.log(valor);
     var b = a.replace(/[^a-z0-9]/gi,'');
-    console.log('validando');
-    console.log(b);
-
     valor.target.value=b;
-
+    this.validacampos();
   }
+
   procesarpago(){
    
     let cadena="";
@@ -159,6 +182,7 @@ console.log('Symbol'+this.currency);
           });
           alert.present();
           this.voucher=data['voucher'];
+          this.putorder();
         }
         else
         {

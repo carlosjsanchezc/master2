@@ -97,7 +97,7 @@ export class LoginModalPage {
 
           let urlapi=this.HttpService.url+"/index.php?route=api/custom/getaddress&api_token="+this.api_token+"&address_id="+address_id;
 
- 
+          this.HttpService.isloging=true;
     
           this.HttpService.httpr(urlapi).subscribe((data2) => 
           {
@@ -142,7 +142,8 @@ export class LoginModalPage {
             console.log('buscando en admin');
             console.log(data3);
             this.datosusuario=data3['results'];
-            if (this.datosusuario['superuser']==true){
+            console.log(this.datosusuario);
+            if (this.datosusuario['success']==true){
               console.log(this.datosusuario);
               this.viewCtrl.dismiss(this.datosusuario);
               
