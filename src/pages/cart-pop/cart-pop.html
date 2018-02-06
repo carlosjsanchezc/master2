@@ -141,12 +141,52 @@
       </ion-item>
       <ion-item>
           <ion-label floating>Forma de Pago</ion-label>
-          <ion-select multiple="false" [(ngModel)]="formadepago" >
-              <ion-option  selected [value]='1'  selected="true">Transferencia Bancaria</ion-option>
+          <ion-select multiple="false" [(ngModel)]="formadepago" (ionChange)="validarlogin()" >
+              <ion-option  selected [value]='1'  selected="false">Transferencia Bancaria</ion-option>
               <ion-option  selected [value]='2'  selected="false">Tarjeta de crédito</ion-option>
               
           </ion-select> 
       </ion-item>
+      <div *ngIf="formadepago==1">
+          <ion-item>
+            <h2>INVERSIONES ELEANA'S, C.A.</h2>
+            <h2>RIF: J-402029424-1</h2>
+            <h3>correo:eleanacarolinaosuna@gmail.com</h3>
+          </ion-item>
+          <ion-item>
+              <img src="assets/imgs/banesco.jpg" height="40px">
+              <ion-note color="dark" item-end>
+              0134-0057-16-0571017304
+              </ion-note>
+          </ion-item>
+          <ion-item>
+              <img src="assets/imgs/bdv.jpg" height="40px">
+              <ion-note color="dark" item-end>
+              0102-0334-19-0000249434
+              </ion-note>
+          </ion-item>
+
+          <ion-item>
+              <img src="assets/imgs/bod.jpg" weight="60px">
+              <ion-note color="dark" item-end>
+              0116-0133-28-0016500580
+              </ion-note>
+          </ion-item>
+      <ion-item>
+          <ion-label floating>Banco</ion-label>
+          <ion-select [(ngModel)]="banco">
+              <ion-option [value]="1" selected="true">Banesco</ion-option>
+              <ion-option [value]="2">Banco de Venezuela</ion-option>
+              <ion-option [value]="3">B.O.D.</ion-option>
+            
+          </ion-select>
+          
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Referencia</ion-label>
+          <ion-input [(ngModel)]="referencia" type="text" (input)='validaespeciales($event)' (input)='validaespeciales($event)' (change)='validaespeciales($event)'></ion-input>
+        </ion-item>
+     </div>
       <div *ngIf="formadepago==2">
           <br>
           <div text-center>

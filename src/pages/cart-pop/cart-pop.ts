@@ -49,12 +49,15 @@ export class CartPopPage {
   cvc:string;
   expirationdate:String=new Date().toISOString();
   voucher:string;
+  formadepago:string;
   meses:any[]=[];
   anios:any[]=[];
+  islogged:boolean;
 
  
   constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
   {
+    this.islogged=this.HttpService.isloging;
     console.log('Entrando a Modal');
     this.api_token='';
     this.api_token = this.navParams.get('api_token');
@@ -62,6 +65,7 @@ export class CartPopPage {
     this.currency = this.navParams.get('currency');
     this.rate=this.navParams.get('rate');
     let an:string;
+    this.formadepago='1';
     an=Date();
 
     console.log('V:'+this.expirationdate);
@@ -88,6 +92,21 @@ console.log('Symbol'+this.currency);
     this.vercarro();
   }
   
+  validarlogin(){
+    if ((!this.islogged)&&(this.formadepago!='1')){
+      this.formadepago='1';
+      let alert = this.AlertController.create({
+        title: 'Error en forma de pago',
+        subTitle: 'Para pagar con tarjeta de crédito usted debe estar registrado y loggeado',
+        buttons: ['OK']
+      });
+   
+      alert.present();
+      
+     
+    }
+  }
+
   save() {
     
   }
