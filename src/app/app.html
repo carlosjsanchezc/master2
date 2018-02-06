@@ -14,7 +14,7 @@
       <ion-list class="sidenav" id="sidenav"  style="padding:0px" class="item-content">
         <button  ion-item><ion-icon name="home"></ion-icon> Home</button>
         <button  ion-item (click)="loginform()"><ion-icon name="person"></ion-icon> Login</button>
-        <button  ion-item (click)="showPrompt()"><ion-icon name="chatboxes"></ion-icon> Mensaje Masivos</button>
+        <button  ion-item (click)="showPrompt()" *ngIf="superusuario"><ion-icon name="chatboxes"></ion-icon> Mensaje Masivos</button>
         <ion-list-header>
             <ion-icon name="basket"> Categorías</ion-icon>
         </ion-list-header>

@@ -19,6 +19,7 @@ export class CartPopPage {
   micart:any[]=[];
   countries:any[]=[];
   zones:any[]=[];
+  botonpago:boolean=true;
   currency:string;
   rate:number;
   api_token:string;
@@ -42,6 +43,15 @@ export class CartPopPage {
   metodopago:string;
   codigometododepago:string;
   observaciones:string;
+  cardholder:string;
+  cedula:string;
+  cardnumber:string;
+  cvc:string;
+  expirationdate:String=new Date().toISOString();
+  voucher:string;
+  meses:any[]=[];
+  anios:any[]=[];
+
  
   constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
   {
@@ -51,8 +61,25 @@ export class CartPopPage {
     this.miurl=this.navParams.get('url');
     this.currency = this.navParams.get('currency');
     this.rate=this.navParams.get('rate');
+    let an:string;
+    an=Date();
 
+    console.log('V:'+this.expirationdate);
+    console.log(an);
+    an=an.substring(11,15);
 
+console.log('Expiration:');
+console.log(this.expirationdate);
+    
+    
+    console.log(an);
+    for (let index = 0; index < 11; index++) {
+      this.meses[index]=index+1;
+      this.anios[index]=(parseInt(an)+index);
+      
+    }
+console.log(this.meses);
+console.log(this.anios);
 console.log('Rate:'+this.rate);
 console.log('Symbol'+this.currency);
   
@@ -64,18 +91,93 @@ console.log('Symbol'+this.currency);
   save() {
     
   }
+
+  validaespeciales(valor){
+    let a=valor.target.value;
+    console.log('Valor a validar:');
+    console.log(valor);
+    var b = a.replace(/[^a-z0-9]/gi,'');
+    console.log('validando');
+    console.log(b);
+
+    valor.target.value=b;
+
+  }
+  procesarpago(){
+   
+    let cadena="";
+    let monto=this.total*this.rate
+
+    cadena="?monto="+monto.toString();
+    cadena+="&cardholder="+this.cardholder;
+    cadena+="&cardholderid="+this.cedula;
+    
+    cadena+="&cardnumber="+this.cardnumber;
+    cadena+="&cvc="+this.cvc;
+    cadena+="&expiration="+this.expirationdate.substring(5,7)+'/'+this.expirationdate.substring(0,4);
+    cadena+="&direccion1="+this.direccion1;
+
+    cadena+="&ciudad="+this.ciudad;
+    cadena+="&codigopostal="+this.codigopostal;
+    cadena+="&zonename="+this.zoneid;
+    
+    
+    this.botonpago=false;
+   
+    let urlapi=this.HttpService.url+"/instapago.php"+cadena;
+    
+    this.HttpService.httpr(urlapi).subscribe((data) => 
+    {
+     
+        console.log('Respuesta del banco');
+        //this.micart=data['results'];
+        console.log(data);
+        if (data['success']==true){
+          let alert = this.AlertController.create({
+            title: 'Pagos',
+            subTitle: 'Pago Aprobado referencia #'+data['reference'],
+            buttons: ['Ok']
+          });
+          alert.present();
+          this.voucher=data['voucher'];
+        }
+        else
+        {
+          let alert = this.AlertController.create({
+            title: 'Error en datos para procesar el pago',
+            subTitle: data['message'],
+            buttons: ['Dismiss']
+          });
+          alert.present();
+          this.botonpago=true;
+        }
+
+       
+      },
+      (error) =>{ 
+        
+        this.botonpago=true;
+      let alert = this.AlertController.create({
+        title: 'Error',
+        subTitle: 'Error:'+JSON.stringify(error),
+        buttons: ['Dismiss']
+      });
+      alert.present();
+
+
+      });
+  }
+
   modificapos(i)
   {
     let qty=this.micart[i].quantity;
     let cartid=this.micart[i].cart_id;
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/editproductscart&api_token="+this.api_token+"&qty="+qty.toString()+"&cart_id="+cartid.toString();
-    console.log("Url:"+urlapi);
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
       console.log('Datos del Carro');
      
         //this.micart=data['results'];
-        console.log(this.micart);
         this.totales();
         //this.micart=data;
       
@@ -97,10 +199,8 @@ console.log('Symbol'+this.currency);
   {
 
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/gettotals&api_token="+this.api_token;
-    console.log("Url:"+urlapi);
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
-      console.log('Datos del Carroxxx');
       this.subtotal=data['subtotal'];
       this.taxes=data['taxes'];
       this.taxes=0;
@@ -109,12 +209,10 @@ console.log('Symbol'+this.currency);
         this.taxes=0;
       }
       this.total=data['total'];
-      console.log(data);      
-     
+      
       },
       (error) =>{ 
         //this.accion=urlapi+'- item:'+JSON.stringify(error);
-      console.error(error);
       let alert = this.AlertController.create({
         title: 'Error',
         subTitle: 'Error:'+JSON.stringify(error),
@@ -129,14 +227,11 @@ console.log('Symbol'+this.currency);
    
     let cartid=this.micart[i].cart_id;
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/delproductscart&api_token="+this.api_token+"&cart_id="+cartid.toString();
-    console.log("Url:"+urlapi);
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
-      console.log('Datos del Carro');
       this.vercarro();
       
-        console.log(this.micart);
-
+   
       },
       (error) =>{ 
         //this.accion=urlapi+'- item:'+JSON.stringify(error);
@@ -192,13 +287,10 @@ putorder()
 
 
 
-  console.log('URL:')
-  console.log(urlapi);
 
    this.HttpService.httpr(urlapi).subscribe((data) => 
   {
-    console.log('Datos de la orden');
-    console.log(data)
+
    this.vercarro();
    let alert = this.AlertController.create({
     title: 'Mensaje',
@@ -242,8 +334,7 @@ putorder()
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/vproductscart&api_token="+this.api_token;
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
-      console.log('Datos del Carro');
-     
+      
         this.micart=data['results'];
         this.totales();
      
@@ -263,20 +354,16 @@ putorder()
     urlapi=this.HttpService.url+"/index.php?route=api/custom/getcountries&api_token="+this.api_token;
     this.HttpService.httpr(urlapi).subscribe((data) => 
     {
-      console.log('Datos del Carro');
-     
+
         let countries=data['results'];
-        console.log(countries);
-        console.log('Datos de paises Leidos');
-        console.log(countries);
+
         
         for (let index = 0; index < countries.length; index++) {
-          console.log('grupo'+index.toString());
-          console.log(countries[index]);
+
           this.countries.push(countries[index]);
           
         }
-        console.log(this.countries);
+
         this.country_id="229";
         this.getzone("229");
  
@@ -303,8 +390,7 @@ putorder()
     {
       
         this.zones=data['results'];
-        console.log('Estados/Regiones');
-        console.log(this.zones);
+
        
       },
       (error) =>{ 

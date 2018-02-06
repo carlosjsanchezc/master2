@@ -31,7 +31,7 @@ export class LoginModalPage {
   rapellido:string;
   rtelefono:string;
   error:string;
-
+  superuser:boolean;
   datosusuario:any[]=[];
   address:any[]=[];
 
@@ -134,16 +134,33 @@ export class LoginModalPage {
         } 
         else
         {
-          let alert = this.AlertController.create({
-            title: 'Mensaje',
-            subTitle: 'El usuario no se encuentra o la clave está errada',
-            buttons: ['Ok']
-          });
-          alert.present();
-          this.error='El usuario no se encuentra o la clave está errada';
-        }
+///// LOGIN SUPERUSER
+          this.api_token=this.HttpService.api_token;
+          let urlapi=this.HttpService.url+"/index.php?route=api/custom/loginadmin&api_token="+this.api_token+"&username="+this.username+"&password="+this.password;
+          this.HttpService.httpr(urlapi).subscribe((data3) => 
+          {
+            console.log('buscando en admin');
+            console.log(data3);
+            this.datosusuario=data3['results'];
+            if (this.datosusuario['superuser']==true){
+              console.log(this.datosusuario);
+              this.viewCtrl.dismiss(this.datosusuario);
+              
+              
+            }
+            else
+            {
+              let alert = this.AlertController.create({
+                title: 'Mensaje',
+                subTitle: 'El usuario no se encuentra o la clave está errada',
+                buttons: ['Ok']
+              });
+              alert.present();
+              this.error='El usuario no se encuentra o la clave está errada';
+            }
       
-
+          });
+        }
       //this.rate=data['value'];
     },
     (error) =>{ 

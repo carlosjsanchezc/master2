@@ -26,6 +26,7 @@ export class MyApp {
   showLevel1 = null;
   showLevel2 = null;
   usuario:string;
+  superusuario:boolean;
   onesignalkey='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
   appid='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
  
@@ -34,7 +35,7 @@ export class MyApp {
 
   constructor(public platform: Platform,private alertCtrl: AlertController, public oneSignal:OneSignal,public menuCtrl: MenuController, public statusBar: StatusBar, public splashScreen: SplashScreen,public HttpService:HttpService,public modalCtrl: ModalController) {
     this.initializeApp();
-
+    this.superusuario=false;
     // used for an example of ngFor and navigation
     this.handlerNotifications();
  
@@ -119,6 +120,7 @@ export class MyApp {
         console.log('datos del modal');
         console.log(data);
         if (data){
+          this.superusuario=data['superuser'];
           this.usuario=data['firstname']+' '+data['lastname'];
         
         }
@@ -140,9 +142,6 @@ export class MyApp {
     {
       this.api_token=data['api_token'];
       this.getcategorias()
-      console.log('Paginas');
-      console.log(this.pages);
-      console.log(data);
 
     },(error) =>{ 
       console.error(error);
