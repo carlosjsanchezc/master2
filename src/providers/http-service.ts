@@ -10,21 +10,21 @@ export class HttpService
  // url="https://localhost/upload";
   categorias:any[]=[];
   isloging=false;
-  api_token:string;
-  customername:string;
-  customerlastname:string;
-  customertelephone:string;
-  customeraddressid:number;
-  customeraddress1:string;
-  customeraddress2:string;
-  customercompany:string;
-  customercity:string;
-  customercountry:string;
-  customercountryid:string;
-  customerpostcode:string;
-  customerzone:string;
-  customerzoneid:string;
-  customeremail:string;
+  api_token:string='';
+  customername:string='';
+  customerlastname:string='';
+  customertelephone:string='';
+  customeraddressid:number=0;
+  customeraddress1:string='';
+  customeraddress2:string='';
+  customercompany:string='';
+  customercity:string='';
+  customercountry:string='';
+  customercountryid:string='';
+  customerpostcode:string='';
+  customerzone:string='';
+  customerzoneid:string='';
+  customeremail:string='';
 
   constructor(
     private http: HttpClient

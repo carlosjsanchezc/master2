@@ -47,14 +47,17 @@ export class CartPopPage {
   cedula:string;
   cardnumber:string;
   cvc:string;
+  referenciatc:string;
   expirationdate:String=new Date().toISOString();
   voucher:string;
+  referencia:string;
+  banco:string;
   formadepago:any;
   meses:any[]=[];
   anios:any[]=[];
   islogged:boolean;
   validaciones:any[]=[];
-
+  isready:boolean=false;
  
   constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
   {
@@ -62,10 +65,7 @@ export class CartPopPage {
       this.validaciones[index]='';
       
     }
-    this.nombre='';
-    this.apellido='';
-    this.email='';
-    this.telefono='';
+
 
     this.islogged=this.HttpService.isloging;
     console.log('Entrando a Modal');
@@ -88,16 +88,32 @@ export class CartPopPage {
   }
   validacampos()
   {
-
-    if (this.nombre.length==0)
+    this.isready=true;
+    for (let index = 0; index < 10; index++) {
+      this.validaciones[index]='';
+      
+    }
+     if (this.nombre.length==0)
     {
       this.validaciones[0]='El nombre no puede estar vacío';
-      console.log(this.validaciones[0]);
+      this.isready=false;
     }
-
+ 
       if (this.apellido.length==0)
       {
       this.validaciones[1]='El Apellido no puede estar vacío';
+      this.isready=false;
+      }
+
+      if (this.email.length==0)
+      {
+      this.validaciones[2]='El correo no puede estar vacío';
+      this.isready=false;
+      }
+      if (this.direccion1.length==0)
+      {
+      this.validaciones[3]='La Dirección no puede estar vacío';
+      this.isready=false;
       }
 
     }
@@ -146,7 +162,17 @@ export class CartPopPage {
   }
 
   procesarpago(){
-   
+   if (this.isready==false)
+   {
+    let alert = this.AlertController.create({
+      title: 'Usuario',
+      subTitle: 'Deben estar completo todos los campos',
+      buttons: ['ok']
+    });
+    this.validacampos();
+    alert.present();
+   }
+   else{
     let cadena="";
     let monto=this.total*this.rate
 
@@ -174,7 +200,10 @@ export class CartPopPage {
         console.log('Respuesta del banco');
         //this.micart=data['results'];
         console.log(data);
+        
         if (data['success']==true){
+          this.referenciatc=data['reference'];
+        
           let alert = this.AlertController.create({
             title: 'Pagos',
             subTitle: 'Pago Aprobado referencia #'+data['reference'],
@@ -189,7 +218,7 @@ export class CartPopPage {
           let alert = this.AlertController.create({
             title: 'Error en datos para procesar el pago',
             subTitle: data['message'],
-            buttons: ['Dismiss']
+            buttons: ['Ok']
           });
           alert.present();
           this.botonpago=true;
@@ -209,6 +238,7 @@ export class CartPopPage {
 
 
       });
+    }
   }
 
   modificapos(i)
@@ -293,8 +323,21 @@ putorder()
 {
 
   let urlapi=this.HttpService.url+"/index.php?route=api/custom/putorder&api_token="+this.api_token;
-  this.codigometododepago="Cheque/Deposito";
-  this.metodopago="Cheque/Deposito";
+  if (this.formadepago==1)
+  {
+    this.metodopago='Transferencia: '+this.referencia+' Banco:'+this.banco;
+    this.codigometododepago=this.referencia+' Banco:'+this.banco;
+
+
+  }
+  else {
+    this.metodopago='Tarjeta de Crédito: '+this.referenciatc;
+    this.codigometododepago=this.referenciatc;
+
+
+  }
+  
+  
   for (let index = 0; index < this.countries.length; index++) {
 
     if (this.countries[index].country_id==this.country_id)
@@ -371,7 +414,7 @@ putorder()
     this.direccion2=this.HttpService.customeraddress2;
     this.email=this.HttpService.customeremail;
 
-
+this.validacampos();
 
     //*************** FILLING CART */
     let urlapi=this.HttpService.url+"/index.php?route=api/custom/vproductscart&api_token="+this.api_token;

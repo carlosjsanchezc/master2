@@ -154,7 +154,7 @@ verproducto(product_id,price,image,name)
       this.accion=urlapi+'- item:'+JSON.stringify(error);
     console.error(error);
     let loader = this.loadingCtrl.create({
-      content:JSON.stringify(error),
+      content:'No hay conexión de datos!',
       duration: 2000
     });
     loader.present();

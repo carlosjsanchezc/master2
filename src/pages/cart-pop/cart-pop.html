@@ -88,35 +88,43 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Nombre</ion-label>
-        <ion-input [(ngModel)]="nombre" type="text" name="nombre" (input)='validaespeciales($event)'></ion-input>
+        <ion-input [(ngModel)]="nombre" type="text"  (input)='validacampos()'></ion-input>
       </ion-item>
-      <ion-item *ngIf="validaciones[0].length>0">
+      <ion-item *ngIf="validaciones[0].length>0" color="dark">
           {{validaciones[0]}}
 
       </ion-item>
       <ion-item>
         <ion-label floating>Apellido</ion-label>
-        <ion-input [(ngModel)]="apellido" type="text" name="apellido" (input)='validaespeciales($event)'></ion-input>
+        <ion-input [(ngModel)]="apellido" type="text"  (input)='validacampos()'></ion-input>
       </ion-item>
-      <ion-item *ngIf="validaciones[1].length>0">
+      <ion-item *ngIf="validaciones[1].length>0" color="dark">
           {{validaciones[1]}}
 
       </ion-item>
       <ion-item>
         <ion-label floating>email</ion-label>
-        <ion-input [(ngModel)]="email" type="email" name="apellido"></ion-input>
+        <ion-input [(ngModel)]="email" type="email" (input)='validacampos()' ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="validaciones[2].length>0" color="dark">
+          {{validaciones[2]}}
       </ion-item>
       <ion-item>
           <ion-label floating>Teléfono</ion-label>
           <ion-input [(ngModel)]="telefono" type="text"></ion-input>
       </ion-item>
+
       <ion-item>
           <ion-label floating>Empresa</ion-label>
           <ion-input [(ngModel)]="empresa" type="text"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label floating>Direccion 1</ion-label>
-          <ion-input [(ngModel)]="direccion1" type="text"></ion-input>
+          <ion-input [(ngModel)]="direccion1" type="text" (input)='validacampos()'></ion-input>
+      </ion-item>
+      <ion-item *ngIf="validaciones[3].length>0" color="dark">
+          {{validaciones[3]}}
+
       </ion-item>
       <ion-item>
           <ion-label floating>Dirección 2</ion-label>
@@ -183,9 +191,9 @@
       <ion-item>
           <ion-label floating>Banco</ion-label>
           <ion-select [(ngModel)]="banco">
-              <ion-option [value]="1" selected="true">Banesco</ion-option>
-              <ion-option [value]="2">Banco de Venezuela</ion-option>
-              <ion-option [value]="3">B.O.D.</ion-option>
+              <ion-option value="Banesco" selected="true">Banesco</ion-option>
+              <ion-option value="Banco de Venezuela">Banco de Venezuela</ion-option>
+              <ion-option value="B.O.D,">B.O.D.</ion-option>
             
           </ion-select>
           
@@ -239,7 +247,7 @@
       </ion-item>
       <ion-item>
         <ion-buttons  color="light">
-        <button ion-button block color="light" (click)="putorder()">Colocar Orden</button>
+        <button ion-button block color="light" [disabled]="!isready" (click)="putorder()">Colocar Orden</button>
       </ion-buttons> 
       </ion-item>
 
