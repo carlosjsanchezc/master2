@@ -156,7 +156,9 @@ this.getoptions();
       console.log(this.api_token);
       console.log('url:'+urlapi);
       console.log(data);
+      console.log('Options:', this.options=data['data']);
       this.options=data['data'];
+      console.log(this.options.length>0);
       if (this.options.length>0)
       {
         this.optionpick=this.options[0].product_option_value[0].product_option_value_id;

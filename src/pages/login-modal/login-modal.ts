@@ -57,7 +57,7 @@ export class LoginModalPage {
       console.log('url:'+urlapi);
       console.log(data);
      
-      if (data['results']==true)
+      if (data['results']=='success')
       {
         this.isloginlogic=false;
       let alert = this.AlertController.create({
@@ -67,7 +67,20 @@ export class LoginModalPage {
       });
       alert.present();
       this.error='';
+      this.viewCtrl.dismiss();
      }
+
+     if (data['results']=='registrado')
+     {
+       
+     let alert = this.AlertController.create({
+       title: 'Mensaje',
+       subTitle: 'El usuario ya se encuentra registrado',
+       buttons: ['Ok']
+     });
+     alert.present();
+     this.error='';
+         }
     });
   }
 
@@ -116,8 +129,7 @@ export class LoginModalPage {
               
               
               
-               console.log('Iniciada session');
-               this.viewCtrl.dismiss(this.datosusuario);
+           
 
               }
               
@@ -129,8 +141,9 @@ export class LoginModalPage {
           console.error(error);
           });
 
-          
-          console.log('Iniciada session');
+
+          this.viewCtrl.dismiss(this.datosusuario);
+
         } 
         else
         {
