@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import {  NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
-import { HttpService} from '../../providers/http-service'
-
-
+import { Component, ViewChild } from '@angular/core';
+import {  Platform, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
+import { HttpService} from '../../providers/http-service';
+import { Gesture } from 'ionic-angular';
+import { ImagenModalPage } from '../imagen-modal/imagen-modal';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 /**
  * Generated class for the EventModalPage page.
  *
@@ -15,6 +16,30 @@ import { HttpService} from '../../providers/http-service'
   templateUrl: 'product-modal.html',
 })
 export class ProductModalPage {
+  @ViewChild('image') element;
+  @ViewChild('imageParent') elementParent;
+
+//************
+image = null;
+  container = null;
+  transforms = [];
+  adjustScale = 1;
+  adjustDeltaX = 0;
+  adjustDeltaY = 0;
+
+  currentScale = null;
+  currentDeltaX = null;
+  currentDeltaY = null;
+
+  public media: any;
+  public src: string;
+  public mediaType: string;
+  private gesture: Gesture;
+  public mediaLoaded:boolean = false;
+
+//****************/
+
+
   event = { nombre: '', cedula:'',fecha:'',telefono:'' };
   micart:any[]=[];
   currency:string;
@@ -26,7 +51,7 @@ export class ProductModalPage {
   taxes:number;
   product_id:number;
   price:number;
-  image:string;
+  imagen:string;
   images:any[]=[];
   options:any[]=[];
   isloginlogic=false;
@@ -35,7 +60,7 @@ export class ProductModalPage {
   myurl:string;
   quantity:number;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
+  constructor(public platform: Platform,public modalCtrl:ModalController, public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, public AlertController:AlertController,public  HttpService:HttpService) 
   {
     console.log('Entrando a Modal');
     this.api_token='';
@@ -46,13 +71,19 @@ export class ProductModalPage {
     console.log('Name:'+this.name);
     this.product_id = this.navParams.get('product_id');
     this.price = this.navParams.get('price');
-    this.image=this.navParams.get('image');
+    this.imagen=this.navParams.get('image');
     this.myurl=HttpService.url;
     console.log(this.navParams);
     this.optionpick=1;
     this.quantity=1;
 this.getimages();
   }
+verzoom(im){
+  console.log('Entrando Modal:',im);
+  let myModal = this.modalCtrl.create(ImagenModalPage,{media:im});
+  console.log('click modal');
+  myModal.present();
+}
 
   enviarmsj(msj,titulo)
   {
@@ -132,7 +163,7 @@ this.getimages();
       console.log(this.api_token);
       console.log('url:'+urlapi);
       console.log(data);
-      this.images=[{'image':this.image}];
+      this.images=[{'image':this.imagen}];
 
     Object.keys(data).map(e => this.images.push(data[e]));
       console.log(this.images);

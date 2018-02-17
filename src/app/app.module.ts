@@ -11,6 +11,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CartPopPage } from '../pages/cart-pop/cart-pop';
 import { ProductModalPage } from '../pages/product-modal/product-modal';
+import { ImagenModalPage } from '../pages/imagen-modal/imagen-modal';
+
 import { OneSignal } from '@ionic-native/onesignal';
 
 
@@ -21,6 +23,7 @@ import { OneSignal } from '@ionic-native/onesignal';
     HomePage,
 
     CartPopPage,
+    ImagenModalPage,
     LoginModalPage,
     ProductModalPage
   ],
@@ -42,6 +45,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 
     CartPopPage,
     LoginModalPage,
+    ImagenModalPage,
     ProductModalPage
  
   ],

@@ -66,6 +66,7 @@ export class MyApp {
   vercontacto(){
     this.contactanos=!this.contactanos;
   }
+  
   showPrompt() {
     let prompt = this.alertCtrl.create({
       title: 'Enviar Mensaje Masivo',

@@ -4,6 +4,9 @@ import { HttpService} from '../../providers/http-service'
 
 import { CartPopPage} from '../cart-pop/cart-pop';
 import { ProductModalPage } from '../product-modal/product-modal';
+import { ImagenModalPage } from '../imagen-modal/imagen-modal';
+
+
 
 
 
