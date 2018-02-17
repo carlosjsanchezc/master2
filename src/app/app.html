@@ -5,7 +5,7 @@
         <img src="assets/imgs/elelogobig.png" height="120px">
         </div>
         <div text-center style="color:white" *ngIf="usuario!=''">
-            {{usuario}}
+            Hola, {{usuario}}
         </div>
     </ion-toolbar>
   </ion-header>
@@ -14,7 +14,16 @@
       <ion-list class="sidenav" id="sidenav"  style="padding:0px" class="item-content">
         <button  ion-item><ion-icon name="home"></ion-icon> Home</button>
         <button  ion-item (click)="loginform()"><ion-icon name="person"></ion-icon> Login</button>
+        <ion-item>
+            <label  (click)="vercontacto()"><ion-icon name="contact"></ion-icon> Contactanos</label>
+            <ion-item-group *ngIf='contactanos' style="font-size: 1rem">
+                <ion-item no-lines style="font-size: 1rem">Teléfonos:0414-5692001</ion-item>
+                <ion-item no-lines style="font-size: 1rem">Instagram:@ele_look</ion-item>
+                <ion-item no-lines style="font-size: 1rem">Dirección:C.C. Divina Pastora</ion-item>
+            </ion-item-group>
+        </ion-item>
         <button  ion-item (click)="showPrompt()" *ngIf="superusuario"><ion-icon name="chatboxes"></ion-icon> Mensaje Masivos</button>
+
         <ion-list-header>
             <ion-icon name="basket"> Categorías</ion-icon>
         </ion-list-header>

@@ -27,6 +27,7 @@ export class MyApp {
   showLevel2 = null;
   usuario:string;
   superusuario:boolean;
+  contactanos:boolean=false;
   onesignalkey='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
   appid='5915c91a-9dbe-48d3-9b0d-2d856aff9d82';
  
@@ -60,6 +61,10 @@ export class MyApp {
       console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
     });
     this.oneSignal.endInit();*/
+  }
+
+  vercontacto(){
+    this.contactanos=!this.contactanos;
   }
   showPrompt() {
     let prompt = this.alertCtrl.create({
