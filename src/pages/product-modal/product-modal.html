@@ -15,32 +15,55 @@
   </ion-header>
   <ion-content padding="10px">
   <ion-col >
+    
       <div text-center>
+        
         <ion-slides pager *ngIf="images.length > 0"  autoplay="4000" loop="true" >
 
               <ion-slide *ngFor="let p of images">
-                
+                <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 200px " scrollbar-x="false" 
+                scrollbar-y="false" 
+                overflow-scroll="false">
+              
+                    
                 <img src="{{myurl+'/image/'+p.image}}" />
+              </ion-scroll>
               </ion-slide>
             </ion-slides>
      </div> 
      
      <p style="font-size:2rem" text-center >{{name}}</p><br>
-        Precio:{{currency}} {{price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
+     <ion-row>
+       <ion-item>
+          <ion-label style="font-size:1.7rem"> Precio:</ion-label>
+          {{currency}} {{price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}
+          
+       </ion-item>
+     </ion-row>
         <ion-row>
-          <ion-col col-4>
+            <ion-item>
             <ion-label style="font-size:1.7rem">Cantidad</ion-label>
-          </ion-col>
-          <ion-col col-4>
-            <ion-note item-end>
-            <input type="number" [(ngModel)]="quantity" style="text-align: end;" >
-            </ion-note>
-          </ion-col>
+
+ 
+              <ion-select [(ngModel)]="quantity" multiple="false">
+                  <ion-option selected value=1>1</ion-option>
+                  <ion-option selected value=2>2</ion-option>
+                  <ion-option selected value=3>3</ion-option>
+                  <ion-option selected value=4>4</ion-option>
+                  <ion-option selected value=5>5</ion-option>
+                  <ion-option selected value=6>6</ion-option>
+                  <ion-option selected value=7>7</ion-option>
+                  <ion-option selected value=8>8</ion-option>
+                  
+              </ion-select>
+            
+            </ion-item>
+
         </ion-row>
         <ion-row>
           <ion-item *ngFor="let custom of options">
           
-          <ion-label style="font-size:2rem">{{custom.name}}</ion-label>
+          <ion-label style="font-size:1.7rem">{{custom.name}}</ion-label>
           <ion-select multiple="false" [(ngModel)]="optionpick">
               <ion-option selected [value]='option.product_option_value_id' id="{{custom.product_option_id}}{{option.product_option_value_id}}" selected="false"  *ngFor="let option of custom.product_option_value; let k=index">{{option.name}}
 

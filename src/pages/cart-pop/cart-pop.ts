@@ -24,8 +24,8 @@ export class CartPopPage {
   rate:number;
   api_token:string;
   miurl:string;
-  total:number;
-  subtotal:number;
+  total:number=0;
+  subtotal:number=0;
   taxes:number;
   country:string;
   zoneid:string;
