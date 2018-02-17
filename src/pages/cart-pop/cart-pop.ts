@@ -23,6 +23,7 @@ export class CartPopPage {
   currency:string;
   rate:number;
   api_token:string;
+  courier:string='';  
   miurl:string;
   total:number=0;
   subtotal:number=0;
@@ -42,16 +43,16 @@ export class CartPopPage {
   zone:string;
   metodopago:string;
   codigometododepago:string;
-  observaciones:string;
+  observaciones:string='';
   cardholder:string;
   cedula:string;
   cardnumber:string;
   cvc:string;
-  referenciatc:string;
+  referenciatc:string='';
   expirationdate:String=new Date().toISOString();
   voucher:string;
   referencia:string;
-  banco:string;
+  banco:string='';
   formadepago:any;
   meses:any[]=[];
   anios:any[]=[];
@@ -66,7 +67,8 @@ export class CartPopPage {
       
     }
 
-
+    this.banco="Banesco";
+    this.courier="MRW";
     this.islogged=this.HttpService.isloging;
     console.log('Entrando a Modal');
     this.api_token='';
@@ -369,6 +371,8 @@ putorder()
   urlapi=urlapi+"&zone_id="+this.zoneid;
   urlapi=urlapi+"&metodopago="+this.metodopago;
   urlapi=urlapi+"&codigometododepago="+this.codigometododepago;
+  urlapi=urlapi+"&metodoenvio="+this.courier+' Cédula:'+this.cedula;;
+  
   urlapi=urlapi+"&observaciones="+this.observaciones;
 
 

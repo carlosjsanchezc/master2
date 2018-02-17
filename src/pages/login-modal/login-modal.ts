@@ -105,6 +105,7 @@ export class LoginModalPage {
           this.HttpService.customertelephone=this.datosusuario['telephone'];
           this.HttpService.customeraddressid=this.datosusuario['address_id'];
           this.HttpService.customeremail=this.datosusuario['email'];
+          this.HttpService.customercedula=this.datosusuario['custom_field'];
           let address_id=data['results']['address_id'];
           this.error="";
 

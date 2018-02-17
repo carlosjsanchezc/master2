@@ -25,7 +25,7 @@ export class HttpService
   customerzone:string='';
   customerzoneid:string='';
   customeremail:string='';
-
+  customercedula:string='';
   constructor(
     private http: HttpClient
   ) {
