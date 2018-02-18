@@ -17,18 +17,19 @@
   <ion-col >
     
       <div text-center>
-        
+
+          
         <ion-slides pager *ngIf="images.length > 0"  autoplay="4000" loop="true" >
 
               <ion-slide *ngFor="let p of images">
 
               
-                    
-                <img (click)="verzoom(myurl+'/image/'+p.image)" src="{{myurl+'/image/'+p.image}}" />
+                   
+                <img  (click)="verzoom(myurl+'/image/'+p.image)" src="{{myurl+'/image/'+p.image}}" />
 
               </ion-slide>
             </ion-slides>
-     </div> 
+      </div> 
      
      <p style="font-size:2rem" text-center >{{name}}</p><br>
      

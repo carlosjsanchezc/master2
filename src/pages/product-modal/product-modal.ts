@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import {  Platform, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
 import { HttpService} from '../../providers/http-service';
-import { Gesture } from 'ionic-angular';
+
 import { ImagenModalPage } from '../imagen-modal/imagen-modal';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
+
 /**
  * Generated class for the EventModalPage page.
  *
@@ -16,28 +17,6 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
   templateUrl: 'product-modal.html',
 })
 export class ProductModalPage {
-  @ViewChild('image') element;
-  @ViewChild('imageParent') elementParent;
-
-//************
-image = null;
-  container = null;
-  transforms = [];
-  adjustScale = 1;
-  adjustDeltaX = 0;
-  adjustDeltaY = 0;
-
-  currentScale = null;
-  currentDeltaX = null;
-  currentDeltaY = null;
-
-  public media: any;
-  public src: string;
-  public mediaType: string;
-  private gesture: Gesture;
-  public mediaLoaded:boolean = false;
-
-//****************/
 
 
   event = { nombre: '', cedula:'',fecha:'',telefono:'' };
@@ -78,6 +57,9 @@ image = null;
     this.quantity=1;
 this.getimages();
   }
+
+
+  
 verzoom(im){
   console.log('Entrando Modal:',im);
   let myModal = this.modalCtrl.create(ImagenModalPage,{media:im});
@@ -166,7 +148,8 @@ verzoom(im){
       this.images=[{'image':this.imagen}];
 
     Object.keys(data).map(e => this.images.push(data[e]));
-      console.log(this.images);
+      console.log('Imagenes->',this.images);
+      console.log(this.images[0].image);
 this.getoptions();
       //this.rate=data['value'];
     },

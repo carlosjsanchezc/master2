@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import {  Platform, NavController, ModalController, NavParams,ViewController, AlertController } from 'ionic-angular';
-import { HttpService} from '../../providers/http-service';
+
 import { Gesture } from 'ionic-angular';
 
 /**
@@ -41,6 +41,7 @@ export class ImagenModalPage {
     public viewCtrl: ViewController
   ) {
     this.media =  this.navParams.get("media");
+    console.log(this.media);
     this.src = this.media;
     console.log("src", this.src);
 
