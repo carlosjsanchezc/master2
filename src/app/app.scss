@@ -34,6 +34,16 @@
        url('../assets/fonts/kaushan-script-v6-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../assets/fonts/kaushan-script-v6-latin-regular.svg#KaushanScript') format('svg'); /* Legacy iOS */
 }
+@font-face {
+  font-family: 'Script MT';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/SCRIPTBL.TTF'); /* IE9 Compat Modes */
+  src: local('Script MT'), local('ScriptMT-Regular'),
+
+       url('../assets/fonts/SCRIPTBL.TTF.ttf') format('truetype'), /* Safari, Android, iOS */
+
+}
 .item-content {
   padding-top: 0px;
   padding-bottom: 02px;
