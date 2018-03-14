@@ -8,7 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { HttpService} from '../providers/http-service';
 import { LoginModalPage } from '../pages/login-modal/login-modal';
 
-
+import { AtencionModalPage } from '../pages/atencion-modal/atencion-modal';
 import { OneSignal } from '@ionic-native/onesignal';
 
 

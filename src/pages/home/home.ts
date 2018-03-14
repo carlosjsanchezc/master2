@@ -4,7 +4,10 @@ import { HttpService} from '../../providers/http-service'
 
 import { CartPopPage} from '../cart-pop/cart-pop';
 import { ProductModalPage } from '../product-modal/product-modal';
-import { ImagenModalPage } from '../imagen-modal/imagen-modal';
+import { AtencionModalPage } from '../atencion-modal/atencion-modal';
+
+
+//import { ImagenModalPage } from '../imagen-modal/imagen-modal';
 
 
 
@@ -45,6 +48,12 @@ export class HomePage {
 
     }
     //this.presentLoading();
+
+  }
+  gohome()
+  {
+    console.log('Gogo');
+    this.navCtrl.setRoot(HomePage);
 
   }
 verproducto(product_id,price,image,name)
@@ -188,6 +197,15 @@ console.log('Symbol'+this.currency);
         });
  
   }
+
+  veratencion()
+  {
+    let myModal = this.modalCtrl.create(AtencionModalPage);
+    console.log('click modal');
+    myModal.present();
+    
+  }
+  
   getcategorias()
   {
 

@@ -22,6 +22,8 @@
   </ion-header>
 
 <ion-content padding>
+    
+
 <div *ngIf="categid" text-center>
   <h1>{{categname}}</h1>
     
@@ -29,7 +31,7 @@
 <div >
     <ion-slides pager *ngIf="banners.length > 0"  autoplay="2000" loop="true" color="light" >
         <ion-slide *ngFor="let p of banners">
-           <p text-center text-color="light" style="font-family:Script MT;color:#D60056;font-weight:bold;font-size:3rem">{{p.title}}</p><br>
+           <p text-center text-color="light" style="font-family:Script MT;color:#D60056;font-size:3rem">{{p.title}}</p><br>
           <img [src]="myurl+p.image" alt="" width="80px" height="220px" style="height:180px">
         
         </ion-slide>
@@ -80,8 +82,40 @@
 
 </ion-grid>
 </ion-content>
-<ion-footer>
-    <ion-toolbar style="font-size:0.7rem">
+<ion-footer style="height: 7%" no-padding>
+  <ion-toolbar style="font-size:0.7rem" style="height: 5%">
+
+        <ion-buttons>
+      <ion-row>
+
+        <ion-col>
+          <button ion-button large full clear class="text-on-bottom" (click)="gohome()" >
+            <ion-icon name="home"></ion-icon>
+
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button large full clear class="text-on-bottom" (click)="vercarro()">
+            <ion-icon name="cart"><ion-badge color="dark">{{countcart}}</ion-badge></ion-icon>
+
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button large full clear class="text-on-bottom">
+            <ion-icon name="person"></ion-icon>
+
+          </button>
+        </ion-col>        
+        <ion-col>
+          <button ion-button large full clear class="text-on-bottom" (click)="veratencion()">
+            <ion-icon name="call"></ion-icon>
+
+          </button>
+        </ion-col>
+
+      </ion-row>
+    </ion-buttons>
+
   {{accion}}
   </ion-toolbar>
 </ion-footer>

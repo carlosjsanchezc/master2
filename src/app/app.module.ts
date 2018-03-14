@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpService}  from '../providers/http-service'
 import { HttpClientModule } from '@angular/common/http';
+//import { HttpClientModule } from '@angular/common/http/src/module';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginModalPage } from '../pages/login-modal/login-modal';
@@ -12,6 +13,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CartPopPage } from '../pages/cart-pop/cart-pop';
 import { ProductModalPage } from '../pages/product-modal/product-modal';
 import { ImagenModalPage } from '../pages/imagen-modal/imagen-modal';
+import { AtencionModalPage } from '../pages/atencion-modal/atencion-modal';
+
 
 import { OneSignal } from '@ionic-native/onesignal';
 
@@ -25,7 +28,8 @@ import { OneSignal } from '@ionic-native/onesignal';
     CartPopPage,
     ImagenModalPage,
     LoginModalPage,
-    ProductModalPage
+    ProductModalPage,
+    AtencionModalPage
   ],
   imports: [
     HttpClientModule,
@@ -46,7 +50,8 @@ import { OneSignal } from '@ionic-native/onesignal';
     CartPopPage,
     LoginModalPage,
     ImagenModalPage,
-    ProductModalPage
+    ProductModalPage,
+    AtencionModalPage
  
   ],
   providers: [

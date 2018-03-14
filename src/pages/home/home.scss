@@ -1,4 +1,8 @@
 page-home {
+.text-on-bottom > .button-inner
+{
+flex-direction: column;
+} 
 
 /* kaushan-script-regular - latin */
 @font-face {
@@ -14,12 +18,16 @@ page-home {
          url('../fonts/kaushan-script-v6-latin-regular.svg#KaushanScript') format('svg'); /* Legacy iOS */
   }
     .scroll-content{
-        background: url("../assets/imgs/bgstars.png") no-repeat center center fixed; 
+       background: url("../assets/imgs/bgstars.png") no-repeat center center fixed; 
+        //background: url("assets/imgs/bg-stars.gif") no-repeat center center fixed; 
+       
         -webkit-background-size: cover;
         -moz-background-size: cover;
         background-size: cover;
     
     }
+
+
     .button {
         align-self: flex-end;
       }

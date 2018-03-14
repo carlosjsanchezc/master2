@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {  Platform, NavController, ModalController, NavParams,ViewController, AlertController } from 'ionic-angular';
+import {  Platform, NavController, ModalController, NavParams,ViewController } from 'ionic-angular';
 
 import { Gesture } from 'ionic-angular';
 

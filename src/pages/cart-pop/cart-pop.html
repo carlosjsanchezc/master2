@@ -138,10 +138,7 @@
           <ion-label floating>Ciudad</ion-label>
           <ion-input [(ngModel)]="ciudad" type="text"></ion-input>
       </ion-item>
-      <ion-item>
-          <ion-label floating>Código Postal</ion-label>
-          <ion-input [(ngModel)]="codigopostal" type="text"></ion-input>
-      </ion-item>
+
       <ion-item>
           <ion-label floating>País</ion-label>
           <ion-select multiple="false" [(ngModel)]="country_id" (ionChange)="getzone($event)">

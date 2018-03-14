@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {  Platform, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
 import { HttpService} from '../../providers/http-service';
 
