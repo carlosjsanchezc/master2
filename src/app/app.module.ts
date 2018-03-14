@@ -14,7 +14,7 @@ import { CartPopPage } from '../pages/cart-pop/cart-pop';
 import { ProductModalPage } from '../pages/product-modal/product-modal';
 import { ImagenModalPage } from '../pages/imagen-modal/imagen-modal';
 import { AtencionModalPage } from '../pages/atencion-modal/atencion-modal';
-
+import { CallNumber } from '@ionic-native/call-number';
 
 import { OneSignal } from '@ionic-native/onesignal';
 
@@ -59,6 +59,7 @@ import { OneSignal } from '@ionic-native/onesignal';
     SplashScreen,
     HttpService,
     OneSignal,
+    CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

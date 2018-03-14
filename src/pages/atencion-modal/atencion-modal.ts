@@ -34,7 +34,7 @@ export class AtencionModalPage {
   datosusuario:any[]=[];
   address:any[]=[];
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public callNumber: CallNumber) 
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, private callNumber: CallNumber) 
   {
     console.log('Entrando a Modal');
     this.username='';
