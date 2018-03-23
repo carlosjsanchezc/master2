@@ -5,8 +5,7 @@ import { HttpService} from '../../providers/http-service'
 import { CartPopPage} from '../cart-pop/cart-pop';
 import { ProductModalPage } from '../product-modal/product-modal';
 import { AtencionModalPage } from '../atencion-modal/atencion-modal';
-
-
+import { ReviewModalPage } from '../review-modal/review-modal';
 //import { ImagenModalPage } from '../imagen-modal/imagen-modal';
 
 
@@ -49,6 +48,20 @@ export class HomePage {
     }
     //this.presentLoading();
 
+  }
+  reviewproduct(id_producto,i)
+  {
+    let data={nombre:this.products[i].name,imagen:this.myurl+this.products[i].image, idproducto:id_producto,api_token:this.api_token};
+    let myModal = this.modalCtrl.create(ReviewModalPage,data);
+    console.log('click modal');
+    myModal.present();
+    console.log('Modal presentado');
+    
+
+    myModal.onDidDismiss(data => {
+      console.log('Saliendo');
+
+    });
   }
   gohome()
   {

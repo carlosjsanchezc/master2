@@ -50,11 +50,12 @@
           </div> 
           <p style="font-size:1.3rem;font-weight: bold;" text-center >{{products[posicion[0]].name}}</p><br>
             Precio:{{currency}} {{products[posicion[0]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
+            <button ion-button round small item-end  color="light" (click)="reviewproduct(products[posicion[0]].product_id,posicion[0])"><ion-icon name="star"></ion-icon></button>
             <br>
           <br>
           <br>
           <br>
-          
+
           <div style="position: absolute; bottom: 0px;right:0px;width:100%;padding:2px">
             <button ion-button round small full color="light" (click)="agregacarro(products[posicion[0]].product_id,'1')" >Agregar  <ion-icon name="cart" style="padding:10px"></ion-icon></button>
           </div>
@@ -66,6 +67,7 @@
           </div>   
           <p text-center style="font-size:1.3rem;font-weight: bold;">{{products[posicion[1]].name}}</p><br>
           Precio:{{currency}} {{products[posicion[1]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
+          <button ion-button round small item-end color="light" (click)="reviewproduct(products[posicion[1]].product_id,posicion[1])"><ion-icon name="star"></ion-icon></button>
           <br>
           <br>
           <br>
@@ -82,40 +84,35 @@
 
 </ion-grid>
 </ion-content>
-<ion-footer style="height: 7%" no-padding>
-  <ion-toolbar style="font-size:0.7rem" style="height: 5%">
+<ion-footer style="height:7%" no-padding>
+  <ion-toolbar style="font-size:0.7rem" style="height: 20%" no-padding>
 
-        <ion-buttons>
+        <ion-buttons color="light">
       <ion-row>
 
         <ion-col>
-          <button ion-button large full clear class="text-on-bottom" (click)="gohome()" >
-            <ion-icon name="home"></ion-icon>
-
+          <button ion-button large full clear  (click)="gohome()" >
+              <img src="assets/imgs/home.png"style="width:32px"> 
           </button>
         </ion-col>
         <ion-col>
-          <button ion-button large full clear class="text-on-bottom" (click)="vercarro()">
-            <ion-icon name="cart"><ion-badge color="dark">{{countcart}}</ion-badge></ion-icon>
-
+          <button ion-button large full clear  (click)="vercarro()">
+              <img src="assets/imgs/cart.png">
           </button>
         </ion-col>
+       
         <ion-col>
-          <button ion-button large full clear class="text-on-bottom">
-            <ion-icon name="person"></ion-icon>
-
-          </button>
-        </ion-col>        
-        <ion-col>
-          <button ion-button large full clear class="text-on-bottom" (click)="veratencion()">
-            <ion-icon name="call"></ion-icon>
+          <button ion-button large full clear  (click)="veratencion()">
+              <img src="assets/imgs/call.png">
 
           </button>
         </ion-col>
 
+        <ion-col>
+            <button ion-button large full clear > 
+                <a onclick="window.open('instagram://user?username=ele_look', '_system'); return false;" item-end ><img src="assets/imgs/instagram.png"></a></button>
+         </ion-col>
       </ion-row>
     </ion-buttons>
-
-  {{accion}}
   </ion-toolbar>
 </ion-footer>

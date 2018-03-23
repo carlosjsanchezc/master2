@@ -17,6 +17,7 @@ import { AtencionModalPage } from '../pages/atencion-modal/atencion-modal';
 import { CallNumber } from '@ionic-native/call-number';
 
 import { OneSignal } from '@ionic-native/onesignal';
+import { ReviewModalPage } from '../pages/review-modal/review-modal';
 
 
 
@@ -29,7 +30,8 @@ import { OneSignal } from '@ionic-native/onesignal';
     ImagenModalPage,
     LoginModalPage,
     ProductModalPage,
-    AtencionModalPage
+    AtencionModalPage,
+    ReviewModalPage
   ],
   imports: [
     HttpClientModule,
@@ -51,7 +53,8 @@ import { OneSignal } from '@ionic-native/onesignal';
     LoginModalPage,
     ImagenModalPage,
     ProductModalPage,
-    AtencionModalPage
+    AtencionModalPage,
+    ReviewModalPage
  
   ],
   providers: [

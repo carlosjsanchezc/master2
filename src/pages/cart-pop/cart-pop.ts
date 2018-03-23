@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {  NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
-import { HttpService} from '../../providers/http-service'
+import { HttpService} from '../../providers/http-service';
 
 
 /**
