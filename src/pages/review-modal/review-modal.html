@@ -1,0 +1,75 @@
+<!--
+  Generated template for the ReviewModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="light">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="cancel()">
+       
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+        <div text-center>
+          
+          <img src="assets/imgs/elelogo.png" height="40px">
+        </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div text-center>
+    <h1>Califica el producto</h1>
+    <h2>{{nombreproducto}}</h2>
+    <img src="{{imagenproducto}}">
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Tu Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="autor"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Comentarios o inquietudes?</ion-label>
+        <ion-textarea [(ngModel)]="texto"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Que tal te gusta?</ion-label>
+      <ion-range min="0" max="5" step="1" pin="true" snaps="true" [(ngModel)]="rating" color="dark">
+        <ion-icon range-left small name="star-outline"></ion-icon>
+        <ion-icon range-right name="star"></ion-icon>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <button ion-button color="light" block (click)="colocareview()" >Calificar</button>
+    </ion-item>
+  </ion-list>
+  <h2>Comentarios Anteriores</h2>
+  <div *ngFor="let review of reviews;let i=index" no-padding >
+    <ion-list>
+        
+      <ion-item>
+        <ion-label stacked>Autor</ion-label>
+        <ion-input type="text" value="{{review.author}}" readonly="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Comentarios o inquietudes?</ion-label>
+        <ion-textarea value="{{review.text}}"></ion-textarea>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked >Que tal te gusta?</ion-label>
+          <ion-range min="0" max="5" step="1" pin="true" snaps="true"  [(ngModel)]="reviews[i].rating" color="secondary">
+          <ion-icon range-left  name="star-outline"></ion-icon>
+          <ion-icon range-right name="star"></ion-icon>
+          </ion-range>
+      </ion-item>
+
+          
+    </ion-list>
+  </div>
+  
+</ion-content>
