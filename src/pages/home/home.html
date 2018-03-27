@@ -46,7 +46,7 @@
   <ion-row *ngFor="let posicion of productsgrid; let i=index"  color="dark" style="border:1px;padding:2px">
       <ion-col col-6 *ngIf="posicion[0]>=0" style="font-size:1rem;" class="iboriti" >
            <div text-center>
-            <img (click)="verproducto(products[posicion[0]].product_id,products[posicion[0]].price,products[posicion[0]].image,products[posicion[0]].name)" *ngIf="products[posicion[0]].image" [src]="myurl+products[posicion[0]].image" alt="" width="auto" height="160px">
+            <img (click)="verproducto(products[posicion[0]].product_id,products[posicion[0]].price,products[posicion[0]].image,products[posicion[0]].name)" *ngIf="products[posicion[0]].image" [src]="myurl+'/image/'+products[posicion[0]].image" alt="" width="auto" height="160px">
           </div> 
           <p style="font-size:1.3rem;font-weight: bold;" text-center >{{products[posicion[0]].name}}</p><br>
             Precio:{{currency}} {{products[posicion[0]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
@@ -63,7 +63,7 @@
  
     <ion-col col-6  *ngIf="posicion[1]>=0"  style="font-size:1rem;padding:2px" class="iboriti"> 
           <div text-center> 
-            <img (click)="verproducto(products[posicion[1]].product_id,products[posicion[1]].price,products[posicion[1]].image,products[posicion[1]].name)" *ngIf="products[posicion[1]].image" [src]="myurl+products[posicion[1]].image" alt=""  width="auto" height="160px">
+            <img (click)="verproducto(products[posicion[1]].product_id,products[posicion[1]].price,products[posicion[1]].image,products[posicion[1]].name)" *ngIf="products[posicion[1]].image" [src]="myurl+'/image/'+products[posicion[1]].image" alt=""  width="auto" height="160px">
           </div>   
           <p text-center style="font-size:1.3rem;font-weight: bold;">{{products[posicion[1]].name}}</p><br>
           Precio:{{currency}} {{products[posicion[1]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
