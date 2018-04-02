@@ -50,8 +50,8 @@
           </div> 
           <p style="font-size:1.3rem;font-weight: bold;" text-center >{{products[posicion[0]].name}}</p><br>
             Precio:{{currency}} {{products[posicion[0]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
-            <button ion-button round small item-end  color="light" (click)="reviewproduct(products[posicion[0]].product_id,posicion[0])"><ion-icon name="star"></ion-icon></button>
-            <br>
+            <button clear ion-button round small item-end  color="light" (click)="reviewproduct(products[posicion[0]].product_id,posicion[0])"><ion-icon name="star"></ion-icon></button>
+            <br> 
           <br>
           <br>
           <br>
@@ -67,7 +67,7 @@
           </div>   
           <p text-center style="font-size:1.3rem;font-weight: bold;">{{products[posicion[1]].name}}</p><br>
           Precio:{{currency}} {{products[posicion[1]].price.toLocaleString('de-ge', {minimumFractionDigits: 2})}}<br>
-          <button ion-button round small item-end color="light" (click)="reviewproduct(products[posicion[1]].product_id,posicion[1])"><ion-icon name="star"></ion-icon></button>
+          <button ion-button clear round small item-end color="light" (click)="reviewproduct(products[posicion[1]].product_id,posicion[1])"><ion-icon name="star"></ion-icon></button>
           <br>
           <br>
           <br>
