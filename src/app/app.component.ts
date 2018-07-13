@@ -146,6 +146,7 @@ export class MyApp {
     this.v=[];
     this.HttpService.loginapi().subscribe((data)=>
     {
+      console.log("Apitoken aqui");
       this.api_token=data['api_token'];
       this.getcategorias()
 

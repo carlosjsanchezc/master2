@@ -8,6 +8,8 @@ import { HttpService} from '../../providers/http-service';
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
+ * 
+ * <ion-option  value=2>Tarjeta de crédito</ion-option>
  */
 
 @Component({

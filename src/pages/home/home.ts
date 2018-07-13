@@ -30,6 +30,7 @@ export class HomePage {
   productsgrid:any[]=[];
   categid:number;
   myurl="https://elelook.com.ve";
+  myurl2="https://elelook.com.ve/image";
 
   public api_token:string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public HttpService:HttpService,public loadingCtrl: LoadingController,public modalCtrl: ModalController, public alertCtrl:AlertController) {
@@ -262,7 +263,7 @@ console.log('Symbol'+this.currency);
     this.HttpService.getBanner().subscribe((data) => 
     {
 
-      this.myurl="https://elelook.com.ve/image/";
+      this.myurl2="https://elelook.com.ve/image/";
       
     this.banners = data['results'];
 
