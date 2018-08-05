@@ -1,8 +1,8 @@
 {
   "name": "elelook",
-  "app_id": "80226ca9",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "80226ca9"
 }

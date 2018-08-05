@@ -39,7 +39,7 @@ export class MyApp {
     this.superusuario=false;
     // used for an example of ngFor and navigation
     this.handlerNotifications();
- 
+    splashScreen.hide();
   }
 
 
