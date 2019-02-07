@@ -9,8 +9,9 @@ import { ReviewModalPage } from '../review-modal/review-modal';
 //import { ImagenModalPage } from '../imagen-modal/imagen-modal';
 
 
-
-
+import { InAppBrowser, } from '@ionic-native/in-app-browser/ngx';
+import {  AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Device } from '@ionic-native/device/ngx';
 
 @Component({
   selector: 'page-home',
@@ -33,7 +34,8 @@ export class HomePage {
   myurl2="https://elelook.com.ve/image";
 
   public api_token:string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public HttpService:HttpService,public loadingCtrl: LoadingController,public modalCtrl: ModalController, public alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public HttpService:HttpService,public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController, public alertCtrl:AlertController) {
     this.api_token='';
     this.rate=0;
     this.loginapi();
@@ -50,9 +52,33 @@ export class HomePage {
     //this.presentLoading();
 
   }
+  /*
+  launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string, username: string) {
+    let app: string;
+    if (this.device.platform === 'iOS') {
+      app = iosSchemaName;
+    } else if (this.device.platform === 'Android') {
+      app = androidPackageName;
+    } else {
+      let browser =this.inAppBrowser.create(httpUrl + username, '_system');
+      return;
+    }
+  
+    AppAvailability.call(app).then(
+      () => { // success callback
+        let browser = this.inAppBrowser.create(appUrl + username, '_system');
+      },
+      () => { // error callback
+        let browser =this.inAppBrowser.create(httpUrl + username, '_system');
+      }
+    );
+  }
+  openInstagram(username: string) {
+    this.launchExternalApp('instagram://', 'com.instagram.android', 'instagram://user?username=', 'https://www.instagram.com/', username);
+  }*/
   reviewproduct(id_producto,i)
   {
-    let data={nombre:this.products[i].name,imagen:this.myurl+this.products[i].image, idproducto:id_producto,api_token:this.api_token};
+    let data={nombre:this.products[i].name,imagen:this.myurl+'/image/'+this.products[i].image, idproducto:id_producto,api_token:this.api_token};
     let myModal = this.modalCtrl.create(ReviewModalPage,data);
     console.log('click modal');
     myModal.present();

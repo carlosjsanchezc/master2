@@ -27,7 +27,8 @@
     <ion-grid>
       <ion-row *ngFor="let item of micart; let i=index" color="dark">
         <ion-col col-2>
-          <img [src]="miurl+item.image">
+          <img [src]="miurl+'/image/'+item.image">
+
         </ion-col>
         <ion-col col-4 style="font-size: 1.2rem">
             {{item.name}}

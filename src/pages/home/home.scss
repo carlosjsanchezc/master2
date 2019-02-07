@@ -17,15 +17,6 @@ flex-direction: column;
          url('../fonts/kaushan-script-v6-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
          url('../fonts/kaushan-script-v6-latin-regular.svg#KaushanScript') format('svg'); /* Legacy iOS */
   }
-    .scroll-content{
-       background: url("../assets/imgs/bgstars.png") no-repeat center center fixed; 
-        //background: url("assets/imgs/bg-stars.gif") no-repeat center center fixed; 
-       
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        background-size: cover;
-    
-    }
 
 
     .button {
@@ -34,7 +25,7 @@ flex-direction: column;
 
       .iboriti {
           
-        border: 1px solid #f007aa;
+        border: 0px solid #f007aa;
     
         font-style: italic;
         border-radius: 5px 5px 5px 5px;
